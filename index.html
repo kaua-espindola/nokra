@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=6">
+  <link rel="stylesheet" href="css/style.css?v=8">
   <noscript><style>html.i18n-pending body{opacity:1}</style></noscript>
 </head>
 <body>
@@ -37,10 +37,6 @@
     <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
     <div class="statusbar mono">
       <div class="shell statusbar__inner">
-        <span class="sb-item sb-item--base"><b data-i18n="status.base"></b><span class="sb-colon">:</span> <span data-i18n="status.baseValue"></span></span>
-        <span class="sb-sep" aria-hidden="true">|</span>
-        <span class="sb-item sb-item--op"><b data-i18n="status.operating"></b><span class="sb-colon">:</span> <span data-i18n="status.operatingValue"></span></span>
-        <span class="sb-sep" aria-hidden="true">|</span>
         <span class="sb-item sb-item--status"><i class="dot dot--ok" aria-hidden="true"></i><b data-i18n="status.status"></b><span class="sb-colon">:</span> <span class="sb-ok" data-i18n="status.statusValue"></span></span>
         <span class="sb-clock" id="sb-clock" aria-live="off"></span>
       </div>
@@ -55,10 +51,10 @@
         </a>
 
         <ul class="nav-links" id="nav-links">
-          <li><a href="#simulador" id="nav-simulador" class="nav-link"><span class="mono n">01</span><span data-i18n="nav.simulator"></span></a></li>
-          <li><a href="#solucoes" id="nav-solucoes" class="nav-link"><span class="mono n">02</span><span data-i18n="nav.solutions"></span></a></li>
-          <li><a href="#dupla" id="nav-dupla" class="nav-link"><span class="mono n">03</span><span data-i18n="nav.team"></span></a></li>
-          <li><a href="#projetos" id="nav-projetos" class="nav-link"><span class="mono n">04</span><span data-i18n="nav.projects"></span></a></li>
+          <li><a href="#servicos" id="nav-servicos" class="nav-link"><span class="mono n">01</span><span data-i18n="nav.services"></span></a></li>
+          <li><a href="#projetos" id="nav-projetos" class="nav-link"><span class="mono n">02</span><span data-i18n="nav.projects"></span></a></li>
+          <li><a href="#simulador" id="nav-simulador" class="nav-link"><span class="mono n">03</span><span data-i18n="nav.sim"></span></a></li>
+          <li><a href="#sobre" id="nav-sobre" class="nav-link"><span class="mono n">04</span><span data-i18n="nav.about"></span></a></li>
         </ul>
 
         <div class="nav-right">
@@ -70,7 +66,7 @@
             <button type="button" class="lang-btn" data-lang="it" id="lang-it" aria-pressed="false">IT</button>
             <button type="button" class="lang-btn" data-lang="es" id="lang-es" aria-pressed="false">ES</button>
           </div>
-          <a href="#orcamento" class="btn btn--accent btn--sm magnetic nav-cta" id="nav-cta">
+          <a href="#contato" class="btn btn--accent btn--sm magnetic nav-cta" id="nav-cta">
             <span data-i18n="nav.cta"></span>
             <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M5 3h8v8"/></svg>
           </a>
@@ -83,11 +79,11 @@
 
     <div class="mobile-drawer" id="mobile-drawer">
       <div class="shell">
-        <a href="#simulador" class="drawer-link" id="drawer-simulador"><span class="mono">01</span><span data-i18n="nav.simulator"></span></a>
-        <a href="#solucoes" class="drawer-link" id="drawer-solucoes"><span class="mono">02</span><span data-i18n="nav.solutions"></span></a>
-        <a href="#dupla" class="drawer-link" id="drawer-dupla"><span class="mono">03</span><span data-i18n="nav.team"></span></a>
-        <a href="#projetos" class="drawer-link" id="drawer-projetos"><span class="mono">04</span><span data-i18n="nav.projects"></span></a>
-        <a href="#orcamento" class="btn btn--accent drawer-cta" id="drawer-cta"><span data-i18n="nav.cta"></span><svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M5 3h8v8"/></svg></a>
+        <a href="#servicos" class="drawer-link" id="drawer-servicos"><span class="mono">01</span><span data-i18n="nav.services"></span></a>
+        <a href="#projetos" class="drawer-link" id="drawer-projetos"><span class="mono">02</span><span data-i18n="nav.projects"></span></a>
+        <a href="#simulador" class="drawer-link" id="drawer-simulador"><span class="mono">03</span><span data-i18n="nav.sim"></span></a>
+        <a href="#sobre" class="drawer-link" id="drawer-sobre"><span class="mono">04</span><span data-i18n="nav.about"></span></a>
+        <a href="#contato" class="btn btn--accent drawer-cta" id="drawer-cta"><span data-i18n="nav.cta"></span><svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M5 3h8v8"/></svg></a>
       </div>
     </div>
   </header>
@@ -95,6 +91,7 @@
   <main>
     <!-- ================================================= HERO -->
     <section class="hero section" id="inicio">
+      <canvas class="particles" data-count="60" aria-hidden="true"></canvas>
       <div class="shell hero__grid">
         <div class="hero__left">
           <div class="sec-meta mono">
@@ -112,13 +109,13 @@
             <p class="hero__sub" data-i18n="hero.sub"></p>
 
             <div class="hero__ctas">
-              <a href="#orcamento" class="btn btn--accent magnetic" id="hero-cta-primary">
+              <a href="#projetos" class="btn btn--accent magnetic" id="hero-cta-primary">
                 <span data-i18n="hero.ctaPrimary"></span>
                 <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M5 3h8v8"/></svg>
               </a>
-              <a href="#simulador" class="btn btn--ghost" id="hero-cta-secondary">
+              <a href="#contato" class="btn btn--ghost" id="hero-cta-secondary">
                 <span data-i18n="hero.ctaSecondary"></span>
-                <svg class="arr arr--down" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v12M3 9l5 5 5-5"/></svg>
+                <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M5 3h8v8"/></svg>
               </a>
             </div>
           </div>
@@ -203,28 +200,50 @@
       <div class="shell hero__scroll mono"><span class="line-v" aria-hidden="true"></span><span data-i18n="hero.scroll"></span></div>
     </section>
 
-    <!-- ================================================= SIMULATOR -->
+    <!-- ================================================= MARQUEE -->
+    <div class="marquee mono" aria-hidden="true">
+      <div class="marquee__track">
+        <div class="marquee__group"><span data-i18n="marquee.0"></span><i aria-hidden="true">//</i><span data-i18n="marquee.1"></span><i aria-hidden="true">//</i><span data-i18n="marquee.2"></span><i aria-hidden="true">//</i><span data-i18n="marquee.3"></span><i aria-hidden="true">//</i></div>
+        <div class="marquee__group"><span data-i18n="marquee.0"></span><i aria-hidden="true">//</i><span data-i18n="marquee.1"></span><i aria-hidden="true">//</i><span data-i18n="marquee.2"></span><i aria-hidden="true">//</i><span data-i18n="marquee.3"></span><i aria-hidden="true">//</i></div>
+      </div>
+    </div>
+
+    <!-- ================================================= SERVICES -->
+    <section class="section section--paper" id="servicos">
+      <div class="shell">
+        <div class="sec-meta mono"><span data-i18n="services.index"></span><span class="coord">04</span></div>
+        <div class="sec-head sec-head--solo"><h2 class="sec-title" data-i18n-html="services.title"></h2></div>
+        <ol class="services">
+          <li class="service" id="service-1"><span class="service__n mono">01</span><h3 class="service__t" data-i18n="services.items.0.t"></h3><p class="service__d" data-i18n="services.items.0.d"></p><span class="service__arrow" aria-hidden="true">↘</span></li>
+          <li class="service" id="service-2"><span class="service__n mono">02</span><h3 class="service__t" data-i18n="services.items.1.t"></h3><p class="service__d" data-i18n="services.items.1.d"></p><span class="service__arrow" aria-hidden="true">↘</span></li>
+          <li class="service" id="service-3"><span class="service__n mono">03</span><h3 class="service__t" data-i18n="services.items.2.t"></h3><p class="service__d" data-i18n="services.items.2.d"></p><span class="service__arrow" aria-hidden="true">↘</span></li>
+          <li class="service" id="service-4"><span class="service__n mono">04</span><h3 class="service__t" data-i18n="services.items.3.t"></h3><p class="service__d" data-i18n="services.items.3.d"></p><span class="service__arrow" aria-hidden="true">↘</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================================================= PROJECTS -->
+    <section class="section section--dark" id="projetos">
+      <div class="shell">
+        <div class="sec-meta mono"><span data-i18n="projects.index"></span><span class="coord">06</span></div>
+        <div class="sec-head">
+          <h2 class="sec-title" data-i18n="projects.title"></h2>
+          <p class="sec-intro" data-i18n="projects.intro"></p>
+        </div>
+        <div class="works i18n-dyn" id="works"></div>
+      </div>
+    </section>
+
+    <!-- ================================================= LIVE TEST -->
     <section class="section section--dark simlab-section" id="simulador">
       <div class="shell">
-        <div class="sec-meta mono">
-          <span data-i18n="sim.index"></span>
-          <span class="coord">LIVE · 03 DEMOS</span>
+        <div class="sec-meta mono"><span data-i18n="sim.index"></span><span class="coord">LIVE · 03</span></div>
+        <div class="sec-head">
+          <h2 class="sec-title" data-i18n="sim.title"></h2>
+          <p class="sec-intro" data-i18n="sim.intro"></p>
         </div>
-
-        <div class="simlab">
-          <div class="simlab__intro">
-            <h2 class="sec-title" data-i18n="sim.title"></h2>
-            <p class="sec-intro" data-i18n="sim.intro"></p>
-            <ol class="simlab__points">
-              <li><button type="button" class="simlab__pt is-active" data-goto="tab-web" id="pt-web"><span class="mono n">01</span><span class="tx"><strong data-i18n="sim.tabs.web"></strong><small data-i18n="sim.points.web"></small></span></button></li>
-              <li><button type="button" class="simlab__pt" data-goto="tab-stock" id="pt-stock"><span class="mono n">02</span><span class="tx"><strong data-i18n="sim.tabs.stock"></strong><small data-i18n="sim.points.stock"></small></span></button></li>
-              <li><button type="button" class="simlab__pt" data-goto="tab-py" id="pt-py"><span class="mono n">03</span><span class="tx"><strong data-i18n="sim.tabs.py"></strong><small data-i18n="sim.points.py"></small></span></button></li>
-            </ol>
-          </div>
-
-          <div class="simlab__stage">
-            <p class="sim-label mono"><span class="sq" aria-hidden="true"></span><span data-i18n="sim.label"></span></p>
-              <div class="sim" id="sim">
+        <div class="simlab__stage">
+          <div class="sim" id="sim">
                 <div class="sim__bar mono">
                   <span class="sim__dots" aria-hidden="true"><i></i><i></i><i></i></span>
                   <span class="sim__url">sim://<span data-brand="slug">nokra</span>/live</span>
@@ -365,357 +384,80 @@
                   </div>
                 </div>
               </div>
-          </div>
         </div>
       </div>
     </section>
 
-    <!-- ================================================= SOLUTIONS / BENTO -->
-    <section class="section section--paper" id="solucoes">
+    <!-- ================================================= ABOUT -->
+    <section class="section section--paper" id="sobre">
       <div class="shell">
-        <div class="sec-meta mono">
-          <span data-i18n="solutions.index"></span>
-          <span class="coord">GRID 12 · 1px</span>
-        </div>
-        <div class="sec-head">
-          <h2 class="sec-title" data-i18n="solutions.title"></h2>
-          <p class="sec-intro" data-i18n="solutions.intro"></p>
-        </div>
-
-        <div class="bento">
-          <!-- B1 -->
-          <article class="bento__cell bento__cell--a" id="bento-web">
-            <div class="bento__top mono"><span class="bento__n">01</span><span data-i18n="solutions.b1.tag"></span></div>
-            <h3 class="bento__title" data-i18n="solutions.b1.title"></h3>
-            <p class="bento__text" data-i18n="solutions.b1.text"></p>
-            <div class="bento__visual vis-bp" aria-hidden="true">
-              <div class="bp bp--xl"><span class="mono">1440</span></div>
-              <div class="bp bp--md"><span class="mono">768</span></div>
-              <div class="bp bp--sm"><span class="mono">360</span></div>
-              <div class="bp-deploy mono"><span data-i18n="solutions.deploy"></span> → Vercel · HostGator</div>
+        <div class="sec-meta mono"><span data-i18n="about.index"></span><span class="coord">UNIP · 2026</span></div>
+        <div class="sec-head sec-head--solo"><h2 class="sec-title" data-i18n="about.title"></h2></div>
+        <div class="people">
+          <article class="person" id="person-k">
+            <div class="person__mark" aria-hidden="true"><span>K</span><i></i></div>
+            <div class="person__body">
+              <h3 class="person__name">Kauã Espíndola</h3>
+              <p class="person__role mono" data-i18n="about.k.role"></p>
+              <p class="person__text" data-i18n="about.k.text"></p>
+              <div class="person__links"><a href="https://portfolio-2026-kaua.vercel.app/" target="_blank" rel="noopener" class="about__link mono" id="k-portfolio"><span data-i18n="about.portfolio"></span><span aria-hidden="true">↗</span></a><a href="https://github.com/kaua-espindola" target="_blank" rel="noopener" class="about__link mono" id="k-github">GitHub<span aria-hidden="true">↗</span></a><a href="https://linkedin.com/in/kaua-espindola-rocha-de-godoi" target="_blank" rel="noopener" class="about__link mono" id="k-linkedin">LinkedIn<span aria-hidden="true">↗</span></a></div>
             </div>
-            <ul class="tags mono"><li>HTML5</li><li>CSS3</li><li>JavaScript</li><li>Tailwind</li><li>Bootstrap</li><li>PHP</li></ul>
-            <p class="bento__out"><span class="arrow" aria-hidden="true">→</span><span data-i18n="solutions.b1.out"></span></p>
           </article>
-
-          <!-- B2 -->
-          <article class="bento__cell bento__cell--b" id="bento-systems">
-            <div class="bento__top mono"><span class="bento__n">02</span><span data-i18n="solutions.b2.tag"></span></div>
-            <h3 class="bento__title" data-i18n="solutions.b2.title"></h3>
-            <p class="bento__text" data-i18n="solutions.b2.text"></p>
-            <div class="bento__visual vis-ledger mono" aria-hidden="true">
-              <div class="lg-row lg-row--h"><span>SKU</span><span>QTY</span><span>SYNC</span></div>
-              <div class="lg-row"><span>KG-0142</span><span>×12</span><span class="st st--ok">●</span></div>
-              <div class="lg-row"><span>KG-0217</span><span>×03</span><span class="st st--low">●</span></div>
-              <div class="lg-row"><span>KG-0388</span><span>×48</span><span class="st st--ok">●</span></div>
-              <div class="lg-row"><span>MKT-991</span><span>×07</span><span class="st st--ok">●</span></div>
+          <article class="person" id="person-g">
+            <div class="person__mark" aria-hidden="true"><span>G</span><i></i></div>
+            <div class="person__body">
+              <h3 class="person__name">Gustavo Clati</h3>
+              <p class="person__role mono" data-i18n="about.g.role"></p>
+              <p class="person__text" data-i18n="about.g.text"></p>
+              <div class="person__links"><a href="https://portifolio-gu.vercel.app" target="_blank" rel="noopener" class="about__link mono" id="g-portfolio"><span data-i18n="about.portfolio"></span><span aria-hidden="true">↗</span></a><a href="https://www.behance.net/gustavoclati" target="_blank" rel="noopener" class="about__link mono" id="g-behance">Behance<span aria-hidden="true">↗</span></a><a href="https://github.com/1Gudy" target="_blank" rel="noopener" class="about__link mono" id="g-github">GitHub<span aria-hidden="true">↗</span></a></div>
             </div>
-            <ul class="tags mono"><li>PHP</li><li>MySQL</li><li>JavaScript</li><li>Marketplace</li></ul>
-            <p class="bento__out"><span class="arrow" aria-hidden="true">→</span><span data-i18n="solutions.b2.out"></span></p>
-          </article>
-
-          <!-- B3 -->
-          <article class="bento__cell bento__cell--c" id="bento-python">
-            <div class="bento__top mono"><span class="bento__n">03</span><span data-i18n="solutions.b3.tag"></span></div>
-            <h3 class="bento__title" data-i18n="solutions.b3.title"></h3>
-            <p class="bento__text" data-i18n="solutions.b3.text"></p>
-            <pre class="bento__visual vis-code mono" aria-hidden="true"><span class="c-k">from</span> routines <span class="c-k">import</span> sheets, api
-
-rows  = sheets.<span class="c-f">read</span>(<span class="c-s">"vendas.xlsx"</span>)
-clean = rows.<span class="c-f">dedupe</span>().<span class="c-f">normalize</span>()
-api.<span class="c-f">push</span>(clean, to=<span class="c-s">"dashboard"</span>)
-<span class="c-c"># ✓ 0.84s · 1247 rows</span></pre>
-            <ul class="tags mono"><li>Python</li><li>APIs</li><li>Excel</li><li>Google Sheets</li></ul>
-            <p class="bento__out"><span class="arrow" aria-hidden="true">→</span><span data-i18n="solutions.b3.out"></span></p>
-          </article>
-
-          <!-- B4 -->
-          <article class="bento__cell bento__cell--d" id="bento-design">
-            <div class="bento__top mono"><span class="bento__n">04</span><span data-i18n="solutions.b4.tag"></span></div>
-            <h3 class="bento__title" data-i18n="solutions.b4.title"></h3>
-            <p class="bento__text" data-i18n="solutions.b4.text"></p>
-            <div class="bento__visual vis-3d" aria-hidden="true">
-              <svg viewBox="0 0 220 150" class="iso">
-                <g class="iso__grid"><path d="M10 120 L110 70 L210 120 M10 120 L110 145 L210 120 M60 95 L160 145 M160 95 L60 145"/></g>
-                <g class="iso__cube">
-                  <path d="M110 20 L160 45 L160 100 L110 125 L60 100 L60 45 Z"/>
-                  <path d="M60 45 L110 70 L160 45 M110 70 L110 125"/>
-                </g>
-                <circle cx="110" cy="70" r="3" class="iso__pt"/>
-                <circle cx="160" cy="45" r="3" class="iso__pt"/>
-                <circle cx="60" cy="100" r="3" class="iso__pt"/>
-              </svg>
-              <div class="figma-frame mono"><span>Frame 01 — 1440 × 900</span></div>
-            </div>
-            <ul class="tags mono"><li>Figma</li><li>Premiere</li><li>CapCut</li><li>Inkscape</li><li>Tinkercad</li></ul>
-            <p class="bento__out"><span class="arrow" aria-hidden="true">→</span><span data-i18n="solutions.b4.out"></span></p>
           </article>
         </div>
+        <p class="about__shared mono"><i class="dot dot--ok" aria-hidden="true"></i><span data-i18n="about.shared"></span></p>
       </div>
     </section>
 
-    <!-- ================================================= TEAM -->
-    <section class="section section--dark" id="dupla">
+    <!-- ================================================= CONTACT -->
+    <section class="section section--dark contact" id="contato">
+      <canvas class="particles" data-count="46" aria-hidden="true"></canvas>
       <div class="shell">
-        <div class="sec-meta mono">
-          <span data-i18n="team.index"></span>
-          <span class="coord">UNIP · 2023 → 2026</span>
+        <div class="sec-meta mono"><span data-i18n="contact.index"></span><span class="coord">BR · UTC-3</span></div>
+        <h2 class="contact__title" data-i18n="contact.title"></h2>
+        <p class="contact__intro" data-i18n="contact.intro"></p>
+        <div class="chips" id="contact-types" role="group">
+          <button type="button" class="chip" data-type="site" id="type-site" aria-pressed="false"><span data-i18n="contact.types.site"></span></button>
+          <button type="button" class="chip" data-type="landing" id="type-landing" aria-pressed="false"><span data-i18n="contact.types.landing"></span></button>
+          <button type="button" class="chip" data-type="system" id="type-system" aria-pressed="false"><span data-i18n="contact.types.system"></span></button>
+          <button type="button" class="chip" data-type="automation" id="type-automation" aria-pressed="false"><span data-i18n="contact.types.automation"></span></button>
         </div>
-        <div class="sec-head">
-          <h2 class="sec-title" data-i18n="team.title"></h2>
-          <p class="sec-intro" data-i18n="team.intro"></p>
-        </div>
-
-        <div class="team-shared mono"><i class="dot dot--ok" aria-hidden="true"></i><span data-i18n="team.shared"></span><span class="team-shared__line" aria-hidden="true"></span><span>BSc · CS</span></div>
-
-        <div class="team">
-          <!-- KAUÃ -->
-          <article class="profile" id="profile-kaua">
-            <header class="profile__head">
-              <span class="mono profile__idx"><span data-i18n="team.profile"></span> 01</span>
-              <div class="monogram" aria-hidden="true"><span>KG</span><i class="mg-c mg-c--tl"></i><i class="mg-c mg-c--br"></i><small class="mono">x:01 y:K</small></div>
-            </header>
-            <h3 class="profile__name">Kauã Espíndola<span>Rocha de Godoi</span></h3>
-            <div class="profile__role">
-              <span class="mono profile__label" data-i18n="team.lRole"></span>
-              <p data-i18n="team.k.role"></p>
-            </div>
-            <div class="profile__rows">
-              <div class="prow"><span class="prow__l mono" data-i18n="team.lEdu"></span><ul class="prow__v edu i18n-dyn" id="k-edu"></ul></div>
-              <div class="prow"><span class="prow__l mono" data-i18n="team.lPractice"></span><ul class="prow__v practice i18n-dyn" id="k-practice"></ul></div>
-              <div class="prow"><span class="prow__l mono" data-i18n="team.lStack"></span><ul class="prow__v tags mono i18n-dyn" id="k-stack"></ul></div>
-              <div class="prow"><span class="prow__l mono" data-i18n="team.lLinks"></span>
-                <ul class="prow__v links">
-                  <li><a href="https://portfolio-2026-kaua.vercel.app/" target="_blank" rel="noopener" id="k-link-portfolio"><span data-i18n="team.portfolio"></span><span class="mono v">portfolio-2026-kaua.vercel.app</span><span class="ar" aria-hidden="true">↗</span></a></li>
-                  <li><a href="https://github.com/kaua-espindola" target="_blank" rel="noopener" id="k-link-github"><span data-i18n="team.github"></span><span class="mono v">github.com/kaua-espindola</span><span class="ar" aria-hidden="true">↗</span></a></li>
-                  <li><a href="https://linkedin.com/in/kaua-espindola-rocha-de-godoi" target="_blank" rel="noopener" id="k-link-linkedin"><span data-i18n="team.linkedin"></span><span class="mono v">in/kaua-espindola-rocha-de-godoi</span><span class="ar" aria-hidden="true">↗</span></a></li>
-                  <li><a href="mailto:kauaespind@gmail.com" id="k-link-email"><span data-i18n="team.email"></span><span class="mono v">kauaespind@gmail.com</span><span class="ar" aria-hidden="true">↗</span></a></li>
-                  <li><a href="https://wa.me/5519996691034" target="_blank" rel="noopener" id="k-link-wa"><span data-i18n="team.whatsapp"></span><span class="mono v">+55 19 99669-1034</span><span class="ar" aria-hidden="true">↗</span></a></li>
-                </ul>
-              </div>
-            </div>
-          </article>
-
-          <!-- GUSTAVO -->
-          <article class="profile" id="profile-gustavo">
-            <header class="profile__head">
-              <span class="mono profile__idx"><span data-i18n="team.profile"></span> 02</span>
-              <div class="monogram" aria-hidden="true"><span>GF</span><i class="mg-c mg-c--tl"></i><i class="mg-c mg-c--br"></i><small class="mono">x:02 y:G</small></div>
-            </header>
-            <h3 class="profile__name">Gustavo Clati<span>Filiputi</span></h3>
-            <div class="profile__role">
-              <span class="mono profile__label" data-i18n="team.lRole"></span>
-              <p data-i18n="team.g.role"></p>
-            </div>
-            <div class="profile__rows">
-              <div class="prow"><span class="prow__l mono" data-i18n="team.lEdu"></span><ul class="prow__v edu i18n-dyn" id="g-edu"></ul></div>
-              <div class="prow"><span class="prow__l mono" data-i18n="team.lPractice"></span><ul class="prow__v practice i18n-dyn" id="g-practice"></ul></div>
-              <div class="prow"><span class="prow__l mono" data-i18n="team.lStack"></span><ul class="prow__v tags mono i18n-dyn" id="g-stack"></ul></div>
-              <div class="prow"><span class="prow__l mono" data-i18n="team.lLinks"></span>
-                <ul class="prow__v links">
-                  <li><a href="https://portifolio-gu.vercel.app" target="_blank" rel="noopener" id="g-link-portfolio"><span data-i18n="team.portfolio"></span><span class="mono v">portifolio-gu.vercel.app</span><span class="ar" aria-hidden="true">↗</span></a></li>
-                  <li><a href="https://www.behance.net/gustavoclati" target="_blank" rel="noopener" id="g-link-behance"><span>Behance</span><span class="mono v">behance.net/gustavoclati</span><span class="ar" aria-hidden="true">↗</span></a></li>
-                  <li><a href="mailto:gustavo.clati@gmail.com" id="g-link-email"><span data-i18n="team.email"></span><span class="mono v">gustavo.clati@gmail.com</span><span class="ar" aria-hidden="true">↗</span></a></li>
-                  <li><a href="https://wa.me/5519971715232" target="_blank" rel="noopener" id="g-link-wa"><span data-i18n="team.whatsapp"></span><span class="mono v">+55 19 97171-5232</span><span class="ar" aria-hidden="true">↗</span></a></li>
-                </ul>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================================================= PROJECTS -->
-    <section class="section section--paper" id="projetos">
-      <div class="shell">
-        <div class="sec-meta mono">
-          <span data-i18n="projects.index"></span>
-          <span class="coord" id="cases-count"></span>
-        </div>
-        <div class="sec-head">
-          <h2 class="sec-title" data-i18n="projects.title"></h2>
-          <p class="sec-intro" data-i18n="projects.intro"></p>
-        </div>
-
-        <div class="filters mono" id="filters" role="toolbar">
-          <button type="button" class="filter is-active" data-filter="all" id="filter-all" aria-pressed="true"><span data-i18n="projects.filters.all"></span><sup class="i18n-dyn" data-count="all"></sup></button>
-          <button type="button" class="filter" data-filter="systems" id="filter-systems" aria-pressed="false"><span data-i18n="projects.filters.systems"></span><sup class="i18n-dyn" data-count="systems"></sup></button>
-          <button type="button" class="filter" data-filter="landing" id="filter-landing" aria-pressed="false"><span data-i18n="projects.filters.landing"></span><sup class="i18n-dyn" data-count="landing"></sup></button>
-          <button type="button" class="filter" data-filter="automation" id="filter-automation" aria-pressed="false"><span data-i18n="projects.filters.automation"></span><sup class="i18n-dyn" data-count="automation"></sup></button>
-        </div>
-
-        <div class="cases i18n-dyn" id="cases"></div>
-
-        <div class="hub" id="portfolio-hub">
-          <div class="hub__intro">
-            <span class="mono hub__label"><span class="sq" aria-hidden="true"></span><span data-i18n="projects.hub.label"></span> · 02</span>
-            <h3 data-i18n="projects.hub.title"></h3>
-            <p data-i18n="projects.hub.text"></p>
-          </div>
-          <div class="hub__links">
-            <a class="hub__link" href="https://portfolio-2026-kaua.vercel.app/" target="_blank" rel="noopener" id="hub-kaua">
-              <span class="mono hub__who">01 · Kauã</span>
-              <span class="hub__url">portfolio-2026-kaua<em>.vercel.app</em></span>
-              <span class="mono hub__role" data-i18n="projects.hub.kRole"></span>
-              <span class="hub__go mono"><span data-i18n="projects.hub.visit"></span> ↗</span>
-            </a>
-            <a class="hub__link" href="https://portifolio-gu.vercel.app" target="_blank" rel="noopener" id="hub-gustavo">
-              <span class="mono hub__who">02 · Gustavo</span>
-              <span class="hub__url">portifolio-gu<em>.vercel.app</em></span>
-              <span class="mono hub__role" data-i18n="projects.hub.gRole"></span>
-              <span class="hub__go mono"><span data-i18n="projects.hub.visit"></span> ↗</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================================================= CALCULATOR -->
-    <section class="section section--dark" id="orcamento">
-      <div class="shell">
-        <div class="sec-meta mono">
-          <span data-i18n="calc.index"></span>
-          <span class="coord">BRIEFING → PROPOSTA</span>
-        </div>
-        <div class="sec-head">
-          <h2 class="sec-title" data-i18n="calc.title"></h2>
-          <p class="sec-intro" data-i18n="calc.intro"></p>
-        </div>
-
-        <div class="calc">
-          <div class="calc__form">
-            <fieldset class="calc__step">
-              <legend class="mono" data-i18n="calc.s1"></legend>
-              <div class="opts opts--2" data-group="type">
-                <button type="button" class="opt" data-value="site" id="opt-type-site"><span class="opt__n mono">A</span><strong data-i18n="calc.types.site.t"></strong><small data-i18n="calc.types.site.d"></small></button>
-                <button type="button" class="opt" data-value="landing" id="opt-type-landing"><span class="opt__n mono">B</span><strong data-i18n="calc.types.landing.t"></strong><small data-i18n="calc.types.landing.d"></small></button>
-                <button type="button" class="opt" data-value="system" id="opt-type-system"><span class="opt__n mono">C</span><strong data-i18n="calc.types.system.t"></strong><small data-i18n="calc.types.system.d"></small></button>
-                <button type="button" class="opt" data-value="automation" id="opt-type-automation"><span class="opt__n mono">D</span><strong data-i18n="calc.types.automation.t"></strong><small data-i18n="calc.types.automation.d"></small></button>
-              </div>
-            </fieldset>
-
-            <fieldset class="calc__step">
-              <legend class="mono" data-i18n="calc.s2"></legend>
-              <div class="opts opts--3" data-group="deadline">
-                <button type="button" class="opt" data-value="urgent" id="opt-deadline-urgent"><span class="opt__n mono">PRIO</span><strong data-i18n="calc.deadlines.urgent.t"></strong><small data-i18n="calc.deadlines.urgent.d"></small></button>
-                <button type="button" class="opt" data-value="d30" id="opt-deadline-30"><span class="opt__n mono">30D</span><strong data-i18n="calc.deadlines.d30.t"></strong><small data-i18n="calc.deadlines.d30.d"></small></button>
-                <button type="button" class="opt" data-value="flexible" id="opt-deadline-flexible"><span class="opt__n mono">FLEX</span><strong data-i18n="calc.deadlines.flexible.t"></strong><small data-i18n="calc.deadlines.flexible.d"></small></button>
-              </div>
-            </fieldset>
-
-            <fieldset class="calc__step">
-              <legend class="mono" data-i18n="calc.s3"></legend>
-              <div class="opts opts--3" data-group="region">
-                <button type="button" class="opt" data-value="brl" id="opt-region-brl"><span class="opt__n mono">BR</span><strong data-i18n="calc.regions.brl.t"></strong><small data-i18n="calc.regions.brl.d"></small></button>
-                <button type="button" class="opt" data-value="eur" id="opt-region-eur"><span class="opt__n mono">EU</span><strong data-i18n="calc.regions.eur.t"></strong><small data-i18n="calc.regions.eur.d"></small></button>
-                <button type="button" class="opt" data-value="usd" id="opt-region-usd"><span class="opt__n mono">INTL</span><strong data-i18n="calc.regions.usd.t"></strong><small data-i18n="calc.regions.usd.d"></small></button>
-              </div>
-            </fieldset>
-
-            <fieldset class="calc__step">
-              <legend class="mono" data-i18n="calc.s4"></legend>
-              <div class="fields">
-                <label class="field" for="calc-name">
-                  <span class="mono" data-i18n="calc.name"></span>
-                  <input type="text" id="calc-name" maxlength="80" data-i18n-ph="calc.namePh" autocomplete="organization">
-                </label>
-                <label class="field" for="calc-details">
-                  <span class="mono" data-i18n="calc.details"></span>
-                  <textarea id="calc-details" rows="3" maxlength="400" data-i18n-ph="calc.detailsPh"></textarea>
-                </label>
-              </div>
-            </fieldset>
-          </div>
-
-          <aside class="calc__summary" id="calc-summary" aria-live="polite">
-            <div class="ticket">
-              <div class="ticket__head mono"><span data-i18n="calc.summary"></span><span id="ticket-id">#NKR-0000</span></div>
-              <dl class="ticket__rows">
-                <div><dt class="mono" data-i18n="calc.msg.type"></dt><dd id="sum-type" class="i18n-dyn"></dd></div>
-                <div><dt class="mono" data-i18n="calc.msg.deadline"></dt><dd id="sum-deadline" class="i18n-dyn"></dd></div>
-                <div><dt class="mono" data-i18n="calc.msg.region"></dt><dd id="sum-region" class="i18n-dyn"></dd></div>
-                <div><dt class="mono" data-i18n="calc.msg.lang"></dt><dd id="sum-lang" class="i18n-dyn"></dd></div>
-              </dl>
-              <div class="ticket__next">
-                <span class="mono ticket__next-l"><span class="sq" aria-hidden="true"></span><span data-i18n="calc.next.label"></span></span>
-                <strong class="ticket__next-t" data-i18n="calc.next.title"></strong>
-                <ol class="ticket__steps">
-                  <li><span class="mono">01</span><span data-i18n="calc.next.steps.0"></span></li>
-                  <li><span class="mono">02</span><span data-i18n="calc.next.steps.1"></span></li>
-                  <li><span class="mono">03</span><span data-i18n="calc.next.steps.2"></span></li>
-                </ol>
-                <p class="ticket__next-n" data-i18n="calc.next.note"></p>
-              </div>
-              <details class="ticket__preview">
-                <summary class="mono"><span data-i18n="calc.preview"></span><span aria-hidden="true">+</span></summary>
-                <pre class="mono i18n-dyn" id="calc-preview"></pre>
-              </details>
-              <div class="ticket__send">
-                <span class="mono ticket__send-l" data-i18n="calc.sendTitle"></span>
-                <a class="btn btn--accent btn--block magnetic" id="send-wa-kaua" href="#" target="_blank" rel="noopener"><span data-i18n="calc.waK"></span><span class="mono num">+55 19 99669-1034</span></a>
-                <a class="btn btn--ink btn--block" id="send-wa-gustavo" href="#" target="_blank" rel="noopener"><span data-i18n="calc.waG"></span><span class="mono num">+55 19 97171-5232</span></a>
-                <a class="btn btn--outline btn--block" id="send-email" href="#"><span data-i18n="calc.email"></span><span class="mono num">mailto ↗</span></a>
-                <button type="button" class="ticket__copy mono" id="copy-summary"><span id="copy-label" class="i18n-dyn"></span></button>
-              </div>
-            </div>
-          </aside>
+        <div class="contact__actions">
+          <a class="btn btn--accent btn--lg magnetic" id="wa-kaua" href="https://wa.me/5519996691034" target="_blank" rel="noopener"><span data-i18n="contact.waK"></span><svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M5 3h8v8"/></svg></a>
+          <a class="btn btn--ghost btn--lg" id="wa-gustavo" href="https://wa.me/5519971715232" target="_blank" rel="noopener"><span data-i18n="contact.waG"></span><svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M5 3h8v8"/></svg></a>
+          <a class="contact__mail mono" id="mail" href="mailto:kauaespind@gmail.com,gustavo.clati@gmail.com"><span data-i18n="contact.email"></span> ↗</a>
         </div>
       </div>
     </section>
   </main>
 
   <!-- ================================================= FOOTER -->
-  <footer class="footer section section--dark" id="contato">
+  <footer class="footer section section--dark" id="rodape">
     <div class="shell">
-      <div class="footer__cta">
-        <span class="mono footer__kicker"><span class="sq" aria-hidden="true"></span><span data-i18n="footer.cta"></span></span>
-        <h2 class="footer__title" data-i18n="footer.ctaBig"></h2>
-        <a href="#orcamento" class="btn btn--accent btn--lg magnetic" id="footer-cta"><span data-i18n="footer.start"></span><svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M5 3h8v8"/></svg></a>
-      </div>
-
-      <div class="footer__cols">
-        <div class="fcol">
-          <span class="mono fcol__l" data-i18n="footer.contact"></span>
-          <a href="mailto:kauaespind@gmail.com" id="f-email-kaua">kauaespind@gmail.com</a>
-          <a href="mailto:gustavo.clati@gmail.com" id="f-email-gustavo">gustavo.clati@gmail.com</a>
-          <a href="https://wa.me/5519996691034" target="_blank" rel="noopener" id="f-wa-kaua" class="mono">WA · +55 19 99669-1034</a>
-          <a href="https://wa.me/5519971715232" target="_blank" rel="noopener" id="f-wa-gustavo" class="mono">WA · +55 19 97171-5232</a>
-        </div>
-        <div class="fcol">
-          <span class="mono fcol__l" data-i18n="footer.nav"></span>
-          <a href="#simulador" id="f-nav-simulador"><span data-i18n="nav.simulator"></span></a>
-          <a href="#solucoes" id="f-nav-solucoes"><span data-i18n="nav.solutions"></span></a>
-          <a href="#dupla" id="f-nav-dupla"><span data-i18n="nav.team"></span></a>
-          <a href="#projetos" id="f-nav-projetos"><span data-i18n="nav.projects"></span></a>
-        </div>
-        <div class="fcol">
-          <span class="mono fcol__l" data-i18n="footer.lang"></span>
-          <div class="f-langs mono">
-            <button type="button" data-lang="pt" id="f-lang-pt">PT-BR</button>
-            <button type="button" data-lang="en" id="f-lang-en">EN</button>
-            <button type="button" data-lang="it" id="f-lang-it">IT</button>
-            <button type="button" data-lang="es" id="f-lang-es">ES</button>
-          </div>
-        </div>
-        <div class="fcol">
-          <span class="mono fcol__l" data-i18n="footer.base"></span>
-          <span>Santa Rita do Passa Quatro</span>
-          <span>São Paulo — Brasil</span>
-          <span class="mono muted">21°42′S · 47°28′W · UTC-3</span>
-        </div>
-      </div>
-
       <div class="footer__mark" aria-hidden="true" data-brand="wordmark"><span>//</span>NOKRA</div>
-
       <div class="footer__bottom mono">
         <span data-i18n="footer.rights"></span>
         <span data-i18n="footer.made"></span>
+        <div class="f-langs">
+          <button type="button" data-lang="pt" id="f-lang-pt">PT</button>
+          <button type="button" data-lang="en" id="f-lang-en">EN</button>
+          <button type="button" data-lang="it" id="f-lang-it">IT</button>
+          <button type="button" data-lang="es" id="f-lang-es">ES</button>
+        </div>
         <a href="#inicio" id="back-top"><span data-i18n="footer.backTop"></span> ↑</a>
       </div>
     </div>
   </footer>
 
-  <script src="js/i18n.js?v=6"></script>
-  <script src="js/app.js?v=6"></script>
+  <script src="js/i18n.js?v=8"></script>
+  <script src="js/app.js?v=8"></script>
 </body>
 </html>

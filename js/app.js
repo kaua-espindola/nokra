@@ -1,6 +1,6 @@
 /* ==========================================================================
    NOKRA — app runtime
-   brand · i18n engine · smart routing · hero stack · live simulator · case filter · project brief
+   brand · i18n engine · smart routing · hero stack · project cards · live simulator · contact
    ========================================================================== */
 (() => {
   "use strict";
@@ -133,12 +133,11 @@
     updateMeta();
     updateLangControls();
     renderClock();
-    renderTeam();
-    renderCases();
+    renderWorks();
     renderStock();
     renderPy();
     renderWfCode();
-    renderCalc();
+    renderContact();
   }
 
   let switchTimer = null;
@@ -146,7 +145,6 @@
     next = normalizeLang(next) || "pt";
     const commit = () => {
       lang = next;
-      if (!calc.regionTouched) calc.region = defaultRegion();
       renderAll();
       store(lang);
       syncUrl(lang);
@@ -170,105 +168,71 @@
     new Intl.NumberFormat(LOCALE[lang], { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(v);
 
   /* ====================================================================
-     STATUS BAR CLOCK (São Paulo ⇄ Rome)
+     STATUS BAR CLOCK (São Paulo)
      ==================================================================== */
   function renderClock() {
     const el = $("#sb-clock");
     if (!el) return;
     const fmt = (tz) => new Intl.DateTimeFormat(LOCALE[lang], { timeZone: tz, hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false }).format(new Date());
-    el.innerHTML = `${esc(t("status.local"))} · SP ${fmt("America/Sao_Paulo")}<span class="rome"> · ${esc(t("status.rome"))} ${fmt("Europe/Rome")}</span>`;
+    el.textContent = `${t("status.local")} · SP ${fmt("America/Sao_Paulo")}`;
   }
 
   /* ====================================================================
-     TEAM
+     PROJECTS · cards (text in i18n `projects.items`, same order as WORKS)
      ==================================================================== */
-  function renderTeam() {
-    ["k", "g"].forEach((p) => {
-      const edu = t(`team.${p}.edu`);
-      const practice = t(`team.${p}.practice`);
-      const stack = t(`team.${p}.stack`);
-      $(`#${p}-edu`).innerHTML = edu.map((e) => `<li><strong>${esc(e.t)}</strong><span class="mono">${esc(e.s)}</span></li>`).join("");
-      $(`#${p}-practice`).innerHTML = practice.map((x) =>
-        `<li><div class="org"><strong>${esc(x.org)}</strong><span class="mono">${esc(x.role)}</span></div><p>${esc(x.text)}</p></li>`).join("");
-      $(`#${p}-stack`).innerHTML = stack.map((s) => `<li>${esc(s)}</li>`).join("");
-    });
-  }
-
-  /* ====================================================================
-     PROJECTS · filter
-     ==================================================================== */
-  // Language-independent case data — same order as `projects.cases` in i18n.js
   const BEHANCE = "https://www.behance.net/gallery/";
-  const CASE_META = [
-    { cat: "systems",    by: "k", links: [["site", "https://kbyte-show.vercel.app/"]] },
-    { cat: "systems",    by: "g", links: [["behance", `${BEHANCE}245382437/NovaPulse-Commerce-Dashboard-Clean-Admin-Panel-Design`]] },
-    { cat: "systems",    by: "k", links: [["site", "https://hat-trick-main.vercel.app/web/inicial.html"]] },
-    { cat: "landing",    by: "k", links: [["site", "https://iron-park.vercel.app/"]] },
-    { cat: "landing",    by: "g", links: [["behance", `${BEHANCE}245383311/Rivlo-AI-Powered-Fitness-Training-Platform-Website`]] },
-    { cat: "landing",    by: "g", links: [["behance", `${BEHANCE}245382843/Aurora-Contabil-Institutional-Website-Design`]] },
-    { cat: "landing",    by: "g", links: [["behance", `${BEHANCE}245382197/Website-Vortice-Fitness-Modern-Landing-Page`]] },
-    { cat: "landing",    by: "k", links: [["site", "https://pizzaria-rest.vercel.app/", "La Forno"], ["site", "https://restaurante-net.vercel.app/", "Lumina"]] },
-    { cat: "automation", by: "k", links: [["code", "https://github.com/kaua-espindola/ComunaCheck-main"]] },
-    { cat: "automation", by: "g", links: [] }
+  const WORKS = [
+    { by: "k", tags: ["PHP", "MySQL", "JavaScript"], links: [["site", "https://kbyte-show.vercel.app/"]] },
+    { by: "k", tags: ["TypeScript", "CSS", "JavaScript"], links: [["site", "https://iron-park.vercel.app/"]] },
+    { by: "g", tags: ["React", "UI/UX"], links: [["behance", `${BEHANCE}245383311/Rivlo-AI-Powered-Fitness-Training-Platform-Website`]] },
+    { by: "g", tags: ["Web design", "UI/UX"], links: [["behance", `${BEHANCE}245382843/Aurora-Contabil-Institutional-Website-Design`]] },
+    { by: "k", tags: ["HTML", "CSS", "JavaScript"], links: [["site", "https://pizzaria-rest.vercel.app/", "La Forno"], ["site", "https://restaurante-net.vercel.app/", "Lumina"]] },
+    { by: "k", tags: ["Python", "Git"], links: [["code", "https://github.com/kaua-espindola/ComunaCheck-main"]] }
   ];
   const AUTHOR = { k: "Kauã", g: "Gustavo" };
-  let currentFilter = "all";
 
-  function caseLinks(meta) {
-    if (!meta.links.length) return `<p class="case__links case__links--none mono">${esc(t("projects.links.none"))}</p>`;
-    return `<div class="case__links">${meta.links.map(([type, url, label]) =>
-      `<a class="case__link mono" href="${esc(url)}" target="_blank" rel="noopener">${esc(label ? `${t(`projects.links.${type}`)} · ${label}` : t(`projects.links.${type}`))}<span aria-hidden="true">↗</span></a>`).join("")}</div>`;
-  }
-
-  function renderCases() {
-    const cases = t("projects.cases");
-    const wrap = $("#cases");
-    wrap.innerHTML = cases.map((c, i) => {
-      const meta = CASE_META[i];
-      const cat = meta.cat;
+  function renderWorks() {
+    const items = t("projects.items");
+    const wrap = $("#works");
+    wrap.innerHTML = items.map((w, i) => {
+      const meta = WORKS[i];
+      const links = meta.links.map(([type, url, label]) =>
+        `<a class="work__link mono" href="${esc(url)}" target="_blank" rel="noopener">${esc(label ? `${label}` : t(`projects.links.${type}`))}<span aria-hidden="true">↗</span></a>`).join("");
       return `
-      <article class="case" data-cat="${cat}" data-by="${meta.by}" id="case-${pad(i + 1)}">
-        <div class="case__meta mono"><span><b>${esc(t("projects.caseLabel"))} ${pad(i + 1)}</b> · ${esc(t("projects.lBy"))} <span class="case__by">${esc(AUTHOR[meta.by])}</span></span><span>${esc(t(`projects.filters.${cat}`))}</span></div>
-        <h3 class="case__title">${esc(c.title)}</h3>
-        <p class="case__ctx mono">${esc(c.context)}</p>
-        <dl class="case__dl">
-          <div><dt>${esc(t("projects.lProblem"))}</dt><dd>${esc(c.problem)}</dd></div>
-          <div><dt>${esc(t("projects.lArch"))}</dt><dd>${esc(c.arch)}</dd></div>
-          <div><dt>${esc(t("projects.lResult"))}</dt><dd>${esc(c.result)}</dd></div>
-        </dl>
-        <ul class="tags mono">${c.stack.map((s) => `<li>${esc(s)}</li>`).join("")}</ul>
-        ${caseLinks(meta)}
+      <article class="work" id="work-${pad(i + 1)}">
+        <div class="work__top mono"><span><b>${pad(i + 1)}</b> · ${esc(w.cat)}</span><span>${esc(t("projects.by"))} ${esc(AUTHOR[meta.by])}</span></div>
+        <span class="work__big" aria-hidden="true">${pad(i + 1)}</span>
+        <h3 class="work__title">${esc(w.title)}</h3>
+        <p class="work__desc">${esc(w.desc)}</p>
+        <div class="work__foot"><ul class="tags mono">${meta.tags.map((x) => `<li>${esc(x)}</li>`).join("")}</ul><div class="work__links">${links}</div></div>
       </article>`;
     }).join("");
-
-    // cases are re-rendered on language switch — only animate them the first time
-    if (!casesSeen) $$(".case", wrap).forEach((el, i) => armReveal(el, "up", i % 2));
-
-    const counts = { all: cases.length };
-    CASE_META.forEach(({ cat }) => { counts[cat] = (counts[cat] || 0) + 1; });
-    $$("[data-count]").forEach((el) => { el.textContent = pad(counts[el.dataset.count] || 0); });
-    applyFilter(false);
+    // cards are re-rendered on language switch — only animate them the first time
+    if (!worksSeen) $$(".work", wrap).forEach((el, i) => armReveal(el, "up", i % 2));
   }
 
-  function applyFilter(animate = true) {
-    const wrap = $("#cases");
-    const run = () => {
-      let visible = 0;
-      $$(".case", wrap).forEach((c) => {
-        const show = currentFilter === "all" || c.dataset.cat === currentFilter;
-        c.hidden = !show;
-        if (show) visible++;
-      });
-      $("#cases-count").textContent = `${pad(visible)} / ${pad(CASE_META.length)} ${t("projects.count")}`;
-      $$(".filter").forEach((b) => {
-        const on = b.dataset.filter === currentFilter;
-        b.classList.toggle("is-active", on);
-        b.setAttribute("aria-pressed", String(on));
-      });
-    };
-    if (!animate || reduceMotion) { run(); return; }
-    wrap.classList.add("is-filtering");
-    setTimeout(() => { run(); requestAnimationFrame(() => wrap.classList.remove("is-filtering")); }, 200);
+  // cards lean towards the cursor and a soft light follows it
+  function initWorksTilt() {
+    if (!finePointer || reduceMotion) return;
+    const wrap = $("#works");
+    wrap.addEventListener("pointermove", (e) => {
+      const card = e.target.closest(".work");
+      if (!card) return;
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      card.classList.add("is-tilting");
+      card.style.setProperty("--mx", `${(x * 100).toFixed(1)}%`);
+      card.style.setProperty("--my", `${(y * 100).toFixed(1)}%`);
+      card.style.setProperty("--ry", `${((x - 0.5) * 6).toFixed(2)}deg`);
+      card.style.setProperty("--rx", `${((0.5 - y) * 6).toFixed(2)}deg`);
+    });
+    wrap.addEventListener("pointerout", (e) => {
+      const card = e.target.closest(".work");
+      if (!card || card.contains(e.relatedTarget)) return;
+      card.classList.remove("is-tilting");
+      card.style.setProperty("--rx", "0deg");
+      card.style.setProperty("--ry", "0deg");
+    });
   }
 
   /* ====================================================================
@@ -362,6 +326,17 @@
         fig.style.setProperty("--my", (((e.clientY - r.top) / r.height) * 2 - 1).toFixed(3));
       });
       hero.addEventListener("pointerleave", () => { fig.style.setProperty("--mx", 0); fig.style.setProperty("--my", 0); });
+    }
+
+    if (!reduceMotion) {
+      const hero = $("#inicio");
+      let ticking = false;
+      const spread = () => {
+        const sp = Math.min(1, Math.max(0, window.scrollY / (hero.offsetHeight * 0.75)));
+        fig.style.setProperty("--sp", sp.toFixed(3));
+        ticking = false;
+      };
+      window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(spread); } }, { passive: true });
     }
 
     set(0);
@@ -646,83 +621,29 @@
   }
 
   /* ====================================================================
-     PROJECT BRIEF (no prices — the proposal comes after a call)
+     CONTACT · pick a project type, links carry a pre-filled message
      ==================================================================== */
-  const defaultRegion = () => ({ pt: "brl", en: "usd", it: "eur", es: "eur" }[lang]);
+  const contact = { type: "site" };
 
-  const calc = { type: "landing", deadline: "d30", region: "brl", regionTouched: false };
-  const ticketId = `#${BRAND.ticket}-${String(new Date().getFullYear()).slice(2)}${Math.random().toString(16).slice(2, 6).toUpperCase()}`;
-
-  function buildMessage(rich) {
-    const m = t("calc.msg");
-    const b = rich ? "*" : "";
-    const name = $("#calc-name").value.trim();
-    const details = $("#calc-details").value.trim();
-    return [
-      m.intro,
-      "",
-      `${b}${m.head}${b} — ${ticketId}`,
-      `• ${m.type}: ${t(`calc.types.${calc.type}.t`)}`,
-      `• ${m.deadline}: ${t(`calc.deadlines.${calc.deadline}.t`)}`,
-      `• ${m.region}: ${t(`calc.regions.${calc.region}.t`)}`,
-      `• ${m.details}: ${details || m.notInformed}`,
-      `• ${m.name}: ${name || m.notInformed}`,
-      `• ${m.lang}: ${t("langName")}`,
-      "",
-      m.outro
-    ].join("\n");
+  function renderContact() {
+    $$(".chip").forEach((c) => {
+      const on = c.dataset.type === contact.type;
+      c.classList.toggle("is-active", on);
+      c.setAttribute("aria-pressed", String(on));
+    });
+    const typeName = t(`contact.types.${contact.type}`);
+    const msg = t("contact.msg", { type: typeName.toLowerCase() });
+    $("#wa-kaua").href = `https://wa.me/${CONTACT.waKaua}?text=${encodeURIComponent(msg)}`;
+    $("#wa-gustavo").href = `https://wa.me/${CONTACT.waGustavo}?text=${encodeURIComponent(msg)}`;
+    $("#mail").href = `mailto:${CONTACT.emails.join(",")}?subject=${encodeURIComponent(t("contact.subject", { type: typeName }))}&body=${encodeURIComponent(msg)}`;
   }
 
-  function renderCalc() {
-    $$(".opts").forEach((group) => {
-      const key = group.dataset.group;
-      $$(".opt", group).forEach((o) => {
-        const on = o.dataset.value === calc[key];
-        o.classList.toggle("is-selected", on);
-        o.setAttribute("aria-pressed", String(on));
-      });
-    });
-    $("#ticket-id").textContent = ticketId;
-    $("#sum-type").textContent = t(`calc.types.${calc.type}.t`);
-    $("#sum-deadline").textContent = t(`calc.deadlines.${calc.deadline}.t`);
-    $("#sum-region").textContent = t(`calc.regions.${calc.region}.t`);
-    $("#sum-lang").textContent = t("langName");
-
-    const rich = buildMessage(true);
-    const plain = buildMessage(false);
-    $("#calc-preview").textContent = plain;
-    $("#send-wa-kaua").href = `https://wa.me/${CONTACT.waKaua}?text=${encodeURIComponent(rich)}`;
-    $("#send-wa-gustavo").href = `https://wa.me/${CONTACT.waGustavo}?text=${encodeURIComponent(rich)}`;
-    const subject = t("calc.msg.subject", { type: t(`calc.types.${calc.type}.t`) });
-    $("#send-email").href = `mailto:${CONTACT.emails.join(",")}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(plain)}`;
-    $("#copy-label").textContent = t("calc.copy");
-  }
-
-  function initCalc() {
-    $$(".opts").forEach((group) => {
-      group.addEventListener("click", (e) => {
-        const opt = e.target.closest(".opt");
-        if (!opt) return;
-        calc[group.dataset.group] = opt.dataset.value;
-        if (group.dataset.group === "region") calc.regionTouched = true;
-        renderCalc();
-      });
-    });
-    ["#calc-name", "#calc-details"].forEach((s) => $(s).addEventListener("input", renderCalc));
-
-    $("#copy-summary").addEventListener("click", async () => {
-      const label = $("#copy-label");
-      try {
-        await navigator.clipboard.writeText(buildMessage(false));
-      } catch (_) {
-        const ta = document.createElement("textarea");
-        ta.value = buildMessage(false);
-        document.body.appendChild(ta); ta.select();
-        try { document.execCommand("copy"); } catch (__) { /* noop */ }
-        ta.remove();
-      }
-      label.textContent = t("calc.copied");
-      setTimeout(() => { label.textContent = t("calc.copy"); }, 1600);
+  function initContact() {
+    $("#contact-types").addEventListener("click", (e) => {
+      const chip = e.target.closest(".chip");
+      if (!chip) return;
+      contact.type = chip.dataset.type;
+      renderContact();
     });
   }
 
@@ -753,7 +674,7 @@
         if (l) l.classList.add("is-current");
       });
     }, { rootMargin: "-45% 0px -50% 0px" });
-    ["simulador", "solucoes", "dupla", "projetos", "orcamento"].forEach((id) => { const el = document.getElementById(id); if (el) spy.observe(el); });
+    ["servicos", "projetos", "simulador", "sobre", "contato"].forEach((id) => { const el = document.getElementById(id); if (el) spy.observe(el); });
   }
 
   function initMagnetic() {
@@ -779,25 +700,19 @@
     [".stack__cap", "fade", () => 7],
     [".sec-title", "clip", () => 0],
     [".sec-intro", "up", () => 2],
-    [".simlab__pt", "up", (i) => 3 + i],
+    [".service", "up", (i) => i],
     [".simlab__stage", "up", () => 2],
-    [".bento__cell", "up", (i) => i % 2],
-    [".team-shared", "up", () => 0],
-    [".profile", "up", (i) => i * 2],
-    [".filters", "up", () => 0],
-    [".hub", "up", () => 0],
-    [".calc__step", "up", (i) => i],
-    [".calc__summary", "up", () => 2],
-    [".footer__kicker", "up", () => 0],
-    [".footer__title", "clip", () => 1],
-    ["#footer-cta", "up", () => 3],
-    [".fcol", "up", (i) => i],
-    [".footer__mark", "up", () => 1],
-    [".footer__bottom", "fade", () => 2],
-    [".reveal", "up", () => 0]
+    [".person", "up", (i) => i * 2],
+    [".about__shared", "fade", () => 3],
+    [".contact__title", "clip", () => 0],
+    [".contact__intro", "up", () => 2],
+    [".chips", "up", () => 3],
+    [".contact__actions", "up", () => 4],
+    [".footer__mark", "up", () => 0],
+    [".footer__bottom", "fade", () => 2]
   ];
   let revealIO = null;
-  let casesSeen = false;
+  let worksSeen = false;
   const revealTargets = new Map(); // observed element → elements it reveals
 
   function armReveal(el, kind = "up", d = 0) {
@@ -814,7 +729,7 @@
 
   function landReveal(el) {
     el.classList.add("in");
-    if (el.classList.contains("case")) casesSeen = true;
+    if (el.classList.contains("work")) worksSeen = true;
     // once landed, hand the element back to its own styles (hover transitions etc.)
     const d = Number(el.style.getPropertyValue("--d")) || 0;
     setTimeout(() => {
@@ -852,19 +767,98 @@
   }
 
   /* ====================================================================
+     PARTICLES · little "//" marks and dots drifting up like data,
+     nudged away by the cursor. One loop per <canvas class="particles">,
+     paused while off screen. Reduced motion: slower, no cursor push.
+     ==================================================================== */
+  function initParticles() {
+    const ORANGE = "255, 79, 0", PAPER = "244, 243, 239";
+    const speed = reduceMotion ? 0.3 : 1;
+
+    $$("canvas.particles").forEach((canvas) => {
+      const ctx = canvas.getContext("2d");
+      const host = canvas.parentElement;
+      const wanted = Number(canvas.dataset.count) || 40;
+      let w = 0, h = 0, dpr = 1, parts = [], onScreen = false, visible = false, raf = 0;
+      const mouse = { x: -9999, y: -9999 };
+
+      const spawn = (anywhere) => {
+        const slash = Math.random() < 0.28;
+        return {
+          x: Math.random() * w,
+          y: anywhere ? Math.random() * h : h + 20,
+          vy: (0.12 + Math.random() * 0.38) * speed,
+          sway: Math.random() * Math.PI * 2,
+          size: slash ? 7 + Math.random() * 7 : 1 + Math.random() * 1.6,
+          slash,
+          alpha: slash ? 0.35 + Math.random() * 0.4 : 0.12 + Math.random() * 0.3,
+          px: 0, py: 0 // cursor push offset
+        };
+      };
+
+      const resize = () => {
+        const r = host.getBoundingClientRect();
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = r.width; h = r.height;
+        canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const n = Math.round(wanted * Math.min(1, w / 1200) + wanted * 0.25);
+        parts = Array.from({ length: n }, () => spawn(true));
+      };
+
+      const draw = () => {
+        ctx.clearRect(0, 0, w, h);
+        for (const p of parts) {
+          p.y -= p.vy;
+          p.sway += 0.01 * speed;
+          const x = p.x + Math.sin(p.sway) * 6;
+          if (!reduceMotion) {
+            const dx = x - mouse.x, dy = p.y - mouse.y, d2 = dx * dx + dy * dy;
+            if (d2 < 120 * 120) { const f = (1 - Math.sqrt(d2) / 120) * 2.2; p.px += (dx / (Math.sqrt(d2) || 1)) * f; p.py += (dy / (Math.sqrt(d2) || 1)) * f; }
+            p.px *= 0.92; p.py *= 0.92;
+          }
+          if (p.y < -20) Object.assign(p, spawn(false));
+          const X = x + p.px, Y = p.y + p.py;
+          // fade in from the bottom and out near the top
+          const edge = Math.min(1, Y / (h * 0.25), (h - Y) / (h * 0.15));
+          const a = Math.max(0, p.alpha * edge);
+          if (p.slash) {
+            ctx.strokeStyle = `rgba(${ORANGE}, ${a})`;
+            ctx.lineWidth = 2;
+            const s = p.size, k = 0.45;
+            ctx.beginPath();
+            ctx.moveTo(X - s * k, Y + s); ctx.lineTo(X + s * k * 0.2, Y - s);
+            ctx.moveTo(X - s * k + s * 0.75, Y + s); ctx.lineTo(X + s * k * 0.2 + s * 0.75, Y - s);
+            ctx.stroke();
+          } else {
+            ctx.fillStyle = `rgba(${PAPER}, ${a})`;
+            ctx.fillRect(X, Y, p.size, p.size);
+          }
+        }
+        raf = visible ? requestAnimationFrame(draw) : 0;
+      };
+
+      const start = () => { if (!raf && visible) raf = requestAnimationFrame(draw); };
+      resize();
+      if ("ResizeObserver" in window) new ResizeObserver(resize).observe(host);
+      const update = () => { visible = onScreen && !document.hidden; start(); };
+      new IntersectionObserver((en) => { onScreen = en[0].isIntersecting; update(); }).observe(host);
+      document.addEventListener("visibilitychange", update);
+      if (!reduceMotion && finePointer) {
+        host.addEventListener("pointermove", (e) => { const r = host.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
+        host.addEventListener("pointerleave", () => { mouse.x = mouse.y = -9999; });
+      }
+    });
+  }
+
+  /* ====================================================================
      BOOT
      ==================================================================== */
   function boot() {
     validateDictionary();
     lang = detectLang();
-    calc.region = defaultRegion();
 
     $$("[data-lang]").forEach((b) => b.addEventListener("click", () => setLang(b.dataset.lang)));
-    $$(".filter").forEach((b) => b.addEventListener("click", () => {
-      if (b.dataset.filter === currentFilter) return;
-      currentFilter = b.dataset.filter;
-      applyFilter(true);
-    }));
     $("#py-run").addEventListener("click", runPy);
 
     applyBrand();
@@ -872,11 +866,13 @@
     initTabs();
     initWireframe();
     initStock();
-    initCalc();
+    initContact();
+    initWorksTilt();
     initHeader();
     initMagnetic();
     initReveal();
     initScrollProgress();
+    initParticles();
 
     renderAll();
     setInterval(renderClock, 1000);
