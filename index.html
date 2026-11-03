@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=8">
+  <link rel="stylesheet" href="css/style.css?v=10">
   <noscript><style>html.i18n-pending body{opacity:1}</style></noscript>
 </head>
 <body>
@@ -53,7 +53,7 @@
         <ul class="nav-links" id="nav-links">
           <li><a href="#servicos" id="nav-servicos" class="nav-link"><span class="mono n">01</span><span data-i18n="nav.services"></span></a></li>
           <li><a href="#projetos" id="nav-projetos" class="nav-link"><span class="mono n">02</span><span data-i18n="nav.projects"></span></a></li>
-          <li><a href="#simulador" id="nav-simulador" class="nav-link"><span class="mono n">03</span><span data-i18n="nav.sim"></span></a></li>
+          <li><a href="#metodo" id="nav-metodo" class="nav-link"><span class="mono n">03</span><span data-i18n="nav.method"></span></a></li>
           <li><a href="#sobre" id="nav-sobre" class="nav-link"><span class="mono n">04</span><span data-i18n="nav.about"></span></a></li>
         </ul>
 
@@ -81,7 +81,7 @@
       <div class="shell">
         <a href="#servicos" class="drawer-link" id="drawer-servicos"><span class="mono">01</span><span data-i18n="nav.services"></span></a>
         <a href="#projetos" class="drawer-link" id="drawer-projetos"><span class="mono">02</span><span data-i18n="nav.projects"></span></a>
-        <a href="#simulador" class="drawer-link" id="drawer-simulador"><span class="mono">03</span><span data-i18n="nav.sim"></span></a>
+        <a href="#metodo" class="drawer-link" id="drawer-metodo"><span class="mono">03</span><span data-i18n="nav.method"></span></a>
         <a href="#sobre" class="drawer-link" id="drawer-sobre"><span class="mono">04</span><span data-i18n="nav.about"></span></a>
         <a href="#contato" class="btn btn--accent drawer-cta" id="drawer-cta"><span data-i18n="nav.cta"></span><svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M5 3h8v8"/></svg></a>
       </div>
@@ -211,7 +211,7 @@
     <!-- ================================================= SERVICES -->
     <section class="section section--paper" id="servicos">
       <div class="shell">
-        <div class="sec-meta mono"><span data-i18n="services.index"></span><span class="coord">04</span></div>
+        <div class="sec-meta mono"><span data-i18n="services.index"></span><span class="coord">WEB · SISTEMAS · PYTHON</span></div>
         <div class="sec-head sec-head--solo"><h2 class="sec-title" data-i18n-html="services.title"></h2></div>
         <ol class="services">
           <li class="service" id="service-1"><span class="service__n mono">01</span><h3 class="service__t" data-i18n="services.items.0.t"></h3><p class="service__d" data-i18n="services.items.0.d"></p><span class="service__arrow" aria-hidden="true">↘</span></li>
@@ -227,164 +227,39 @@
       <div class="shell">
         <div class="sec-meta mono"><span data-i18n="projects.index"></span><span class="coord">06</span></div>
         <div class="sec-head">
-          <h2 class="sec-title" data-i18n="projects.title"></h2>
+          <h2 class="sec-title" data-i18n-html="projects.title"></h2>
           <p class="sec-intro" data-i18n="projects.intro"></p>
         </div>
         <div class="works i18n-dyn" id="works"></div>
       </div>
     </section>
 
-    <!-- ================================================= LIVE TEST -->
-    <section class="section section--dark simlab-section" id="simulador">
+    <!-- ================================================= MANIFESTO (orange band) -->
+    <section class="band" id="manifesto" aria-labelledby="manifesto-t">
+      <div class="band__slashes" aria-hidden="true"><svg viewBox="0 0 80 80"><polygon points="6,68 17,68 35.9,26 24.9,26"/><polygon points="30,76 41,76 73.4,4 62.4,4"/></svg></div>
+      <div class="shell band__grid">
+        <div class="band__aside">
+          <h2 class="band__label mono" id="manifesto-t" data-i18n="manifesto.label"></h2>
+          <p data-i18n="manifesto.p1"></p>
+          <p data-i18n="manifesto.p2"></p>
+        </div>
+        <blockquote class="band__quote">
+          <span class="band__qmark" aria-hidden="true">“</span>
+          <p class="band__statement i18n-dyn" id="band-statement"></p>
+          <cite class="band__cite mono" data-i18n="manifesto.cite"></cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ================================================= METHOD -->
+    <section class="section section--dark method" id="metodo">
       <div class="shell">
-        <div class="sec-meta mono"><span data-i18n="sim.index"></span><span class="coord">LIVE · 03</span></div>
+        <div class="sec-meta mono"><span data-i18n="method.index"></span><span class="coord">01 → 04</span></div>
         <div class="sec-head">
-          <h2 class="sec-title" data-i18n="sim.title"></h2>
-          <p class="sec-intro" data-i18n="sim.intro"></p>
+          <h2 class="sec-title" data-i18n-html="method.title"></h2>
+          <p class="sec-intro" data-i18n="method.intro"></p>
         </div>
-        <div class="simlab__stage">
-          <div class="sim" id="sim">
-                <div class="sim__bar mono">
-                  <span class="sim__dots" aria-hidden="true"><i></i><i></i><i></i></span>
-                  <span class="sim__url">sim://<span data-brand="slug">nokra</span>/live</span>
-                  <span class="sim__live"><i class="dot dot--ok" aria-hidden="true"></i><span data-i18n="sim.live"></span></span>
-                </div>
-
-                <div class="sim__tabs" role="tablist" data-i18n-aria="a11y.tabs">
-                  <button type="button" role="tab" class="sim__tab is-active" id="tab-web" data-tab="web" aria-selected="true" aria-controls="panel-web">
-                    <span class="mono n">01</span>
-                    <span class="t" data-i18n="sim.tabs.web"></span>
-                    <span class="mono s">HTML · CSS · Tailwind</span>
-                  </button>
-                  <button type="button" role="tab" class="sim__tab" id="tab-stock" data-tab="stock" aria-selected="false" aria-controls="panel-stock" tabindex="-1">
-                    <span class="mono n">02</span>
-                    <span class="t" data-i18n="sim.tabs.stock"></span>
-                    <span class="mono s">PHP · MySQL · JS</span>
-                  </button>
-                  <button type="button" role="tab" class="sim__tab" id="tab-py" data-tab="py" aria-selected="false" aria-controls="panel-py" tabindex="-1">
-                    <span class="mono n">03</span>
-                    <span class="t" data-i18n="sim.tabs.py"></span>
-                    <span class="mono s">Python · Excel · APIs</span>
-                  </button>
-                </div>
-
-                <div class="sim__panels">
-                  <!-- TAB 1 — WEB -->
-                  <div class="sim__panel is-active" id="panel-web" role="tabpanel" aria-labelledby="tab-web">
-                    <div class="wf-toolbar mono">
-                      <span class="wf-hint" data-i18n="sim.web.hint"></span>
-                      <div class="seg" id="wf-device">
-                        <button type="button" class="is-active" data-device="desktop" id="wf-desktop"><span data-i18n="sim.web.desktop"></span></button>
-                        <button type="button" data-device="mobile" id="wf-mobile"><span data-i18n="sim.web.mobile"></span></button>
-                      </div>
-                    </div>
-
-                    <div class="wf-stage">
-                      <div class="mock" id="wf-mock" style="--reveal:55%">
-                        <!-- wireframe layer -->
-                        <div class="mock__layer mock__wire" aria-hidden="true">
-                          <div class="m-nav"><span class="wb wb--logo">LOGO</span><span class="m-links"><span class="wb wb--s"></span><span class="wb wb--s"></span><span class="wb wb--s"></span></span></div>
-                          <div class="m-hero">
-                            <div class="m-copy">
-                              <span class="wb wb--h">H1</span>
-                              <span class="wb wb--h2"></span>
-                              <span class="wb wb--p"></span>
-                              <span class="wb wb--p wb--short"></span>
-                              <span class="wb wb--btn">BUTTON</span>
-                            </div>
-                            <div class="wb wb--img">IMG 4:3</div>
-                          </div>
-                          <div class="m-cards"><span class="wb wb--card">CARD</span><span class="wb wb--card">CARD</span><span class="wb wb--card">CARD</span></div>
-                        </div>
-                        <!-- rendered UI layer -->
-                        <div class="mock__layer mock__ui">
-                          <div class="m-nav"><span class="ui-logo"><i></i><span data-i18n="sim.web.brand"></span></span><span class="m-links"><span data-i18n="sim.web.nav1"></span><span data-i18n="sim.web.nav2"></span><span data-i18n="sim.web.nav3"></span></span></div>
-                          <div class="m-hero">
-                            <div class="m-copy">
-                              <span class="ui-pill">★ 4,9 · Google</span>
-                              <strong class="ui-h" data-i18n="sim.web.heroTitle"></strong>
-                              <span class="ui-p" data-i18n="sim.web.heroText"></span>
-                              <span class="ui-btn"><span data-i18n="sim.web.cta"></span> →</span>
-                            </div>
-                            <div class="ui-img" aria-hidden="true"><i class="o1"></i><i class="o2"></i><i class="o3"></i></div>
-                          </div>
-                          <div class="m-cards">
-                            <span class="ui-card"><i>01</i><span data-i18n="sim.web.card1"></span></span>
-                            <span class="ui-card"><i>02</i><span data-i18n="sim.web.card2"></span></span>
-                            <span class="ui-card"><i>03</i><span data-i18n="sim.web.card3"></span></span>
-                          </div>
-                        </div>
-                        <div class="mock__scan" aria-hidden="true"><span class="mock__knob">⟷</span></div>
-                        <span class="mock__tag mock__tag--ui mono" data-i18n="sim.web.ui"></span>
-                        <span class="mock__tag mock__tag--wire mono" data-i18n="sim.web.wire"></span>
-                      </div>
-                    </div>
-
-                    <input type="range" class="wf-range" id="wf-range" min="0" max="100" value="55" data-i18n-aria="a11y.range">
-                    <div class="wf-code mono" id="wf-code"></div>
-                  </div>
-
-                  <!-- TAB 2 — STOCK -->
-                  <div class="sim__panel" id="panel-stock" role="tabpanel" aria-labelledby="tab-stock" hidden>
-                    <div class="stk">
-                      <div class="stk__head mono"><span data-i18n="sim.stock.title"></span><span class="stk__db"><i class="dot dot--ok"></i>mysql 8.0</span></div>
-                      <div class="stk__kpis">
-                        <div class="kpi"><span class="kpi__l mono" data-i18n="sim.stock.kItems"></span><strong class="kpi__v" id="kpi-items">0</strong></div>
-                        <div class="kpi"><span class="kpi__l mono" data-i18n="sim.stock.kValue"></span><strong class="kpi__v" id="kpi-value">0</strong></div>
-                        <div class="kpi"><span class="kpi__l mono" data-i18n="sim.stock.kSales"></span><strong class="kpi__v" id="kpi-sales">0</strong></div>
-                        <div class="kpi kpi--alert"><span class="kpi__l mono" data-i18n="sim.stock.kLow"></span><strong class="kpi__v" id="kpi-low">0</strong></div>
-                      </div>
-                      <form class="stk__form" id="stk-form" novalidate>
-                        <input type="text" id="stk-name" maxlength="40" data-i18n-ph="sim.stock.fName" data-i18n-aria="sim.stock.fName" autocomplete="off">
-                        <input type="number" id="stk-qty" min="0" max="9999" step="1" data-i18n-ph="sim.stock.fQty" data-i18n-aria="sim.stock.fQty">
-                        <input type="number" id="stk-price" min="0" step="0.01" data-i18n-ph="sim.stock.fPrice" data-i18n-aria="sim.stock.fPrice">
-                        <button type="submit" class="btn btn--accent btn--xs" id="stk-add"><span data-i18n="sim.stock.add"></span> +</button>
-                      </form>
-                      <div class="stk__table-wrap">
-                        <table class="stk__table">
-                          <thead>
-                            <tr>
-                              <th class="mono">ID</th>
-                              <th class="mono" data-i18n="sim.stock.cProduct"></th>
-                              <th class="mono num" data-i18n="sim.stock.cQty"></th>
-                              <th class="mono num" data-i18n="sim.stock.cPrice"></th>
-                              <th class="mono" data-i18n="sim.stock.cAct"></th>
-                            </tr>
-                          </thead>
-                          <tbody id="stk-body" class="i18n-dyn"></tbody>
-                        </table>
-                      </div>
-                      <div class="stk__log mono i18n-dyn" id="stk-log" aria-live="polite"></div>
-                    </div>
-                  </div>
-
-                  <!-- TAB 3 — PYTHON -->
-                  <div class="sim__panel" id="panel-py" role="tabpanel" aria-labelledby="tab-py" hidden>
-                    <div class="py">
-                      <div class="py__cols">
-                        <div class="py__col">
-                          <div class="py__head mono"><span data-i18n="sim.py.raw"></span><span class="py__file" data-i18n="sim.py.file"></span></div>
-                          <div class="py__raw mono i18n-dyn" id="py-raw"></div>
-                        </div>
-                        <div class="py__col">
-                          <div class="py__head mono"><span data-i18n="sim.py.clean"></span><span class="py__file" data-i18n="sim.py.report"></span></div>
-                          <div class="py__out i18n-dyn" id="py-out"></div>
-                        </div>
-                      </div>
-                      <div class="py__term mono i18n-dyn" id="py-term" aria-live="polite"></div>
-                      <div class="py__actions">
-                        <button type="button" class="btn btn--accent btn--sm" id="py-run">
-                          <svg viewBox="0 0 16 16" aria-hidden="true" class="play"><path d="M4 2.5v11l9-5.5z"/></svg>
-                          <span id="py-run-label" class="i18n-dyn"></span>
-                        </button>
-                        <div class="py__progress" aria-hidden="true"><i id="py-progress"></i></div>
-                        <span class="py__pct mono" id="py-pct">0%</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-        </div>
+        <ol class="steps i18n-dyn" id="steps"></ol>
       </div>
     </section>
 
@@ -422,18 +297,50 @@
       <canvas class="particles" data-count="46" aria-hidden="true"></canvas>
       <div class="shell">
         <div class="sec-meta mono"><span data-i18n="contact.index"></span><span class="coord">BR · UTC-3</span></div>
-        <h2 class="contact__title" data-i18n="contact.title"></h2>
-        <p class="contact__intro" data-i18n="contact.intro"></p>
-        <div class="chips" id="contact-types" role="group">
-          <button type="button" class="chip" data-type="site" id="type-site" aria-pressed="false"><span data-i18n="contact.types.site"></span></button>
-          <button type="button" class="chip" data-type="landing" id="type-landing" aria-pressed="false"><span data-i18n="contact.types.landing"></span></button>
-          <button type="button" class="chip" data-type="system" id="type-system" aria-pressed="false"><span data-i18n="contact.types.system"></span></button>
-          <button type="button" class="chip" data-type="automation" id="type-automation" aria-pressed="false"><span data-i18n="contact.types.automation"></span></button>
+        <div class="contact__grid">
+          <div class="contact__form">
+            <h2 class="contact__title" data-i18n-html="contact.title"></h2>
+            <p class="contact__intro" data-i18n="contact.intro"></p>
+            <label class="field" for="biz-name">
+              <span class="field__label mono" data-i18n="contact.nameLabel"></span>
+              <input class="field__input" id="biz-name" type="text" maxlength="28" autocomplete="organization" spellcheck="false" data-i18n-ph="contact.namePh">
+            </label>
+            <fieldset class="field field--types">
+              <legend class="field__label mono" data-i18n="contact.typeLabel"></legend>
+              <div class="chips" id="contact-types">
+                <button type="button" class="chip" data-type="site" id="type-site" aria-pressed="false"><span data-i18n="contact.types.site"></span></button>
+                <button type="button" class="chip" data-type="landing" id="type-landing" aria-pressed="false"><span data-i18n="contact.types.landing"></span></button>
+                <button type="button" class="chip" data-type="system" id="type-system" aria-pressed="false"><span data-i18n="contact.types.system"></span></button>
+                <button type="button" class="chip" data-type="automation" id="type-automation" aria-pressed="false"><span data-i18n="contact.types.automation"></span></button>
+              </div>
+            </fieldset>
+            <div class="contact__actions">
+              <a class="btn btn--accent btn--lg magnetic" id="wa-team" href="https://wa.me/5519996691034" target="_blank" rel="noopener"><span data-i18n="contact.cta"></span><svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M5 3h8v8"/></svg></a>
+              <a class="contact__mail mono" id="mail" href="mailto:equipenokra@gmail.com"><span data-i18n="contact.email"></span> ↗</a>
+            </div>
+          </div>
+
+          <div class="pv pv--site" id="pv" aria-hidden="true">
+            <div class="pv__bar mono"><span class="pv__dots"><i></i><i></i><i></i></span><span class="pv__url" id="pv-url"></span><span class="pv__tag" data-i18n="contact.previewTag"></span></div>
+            <div class="pv__body" id="pv-body">
+              <div class="pv__nav"><span class="pv__logo"><i></i><span id="pv-logo"></span></span><span class="pv__links"><i></i><i></i><i></i></span></div>
+              <div class="pv__hero">
+                <span class="pv__kicker mono" id="pv-k"></span>
+                <strong class="pv__name" id="pv-name"></strong>
+                <span class="pv__sub" id="pv-s"></span>
+                <span class="pv__btn" id="pv-b"></span>
+              </div>
+              <div class="pv__deco"><i></i><i></i><i></i><i></i></div>
+              <div class="pv__foot mono"><span>© 2026 <span id="pv-foot"></span></span><span>// <span data-brand="name">Nokra</span></span></div>
+            </div>
+          </div>
         </div>
-        <div class="contact__actions">
-          <a class="btn btn--accent btn--lg magnetic" id="wa-kaua" href="https://wa.me/5519996691034" target="_blank" rel="noopener"><span data-i18n="contact.waK"></span><svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M5 3h8v8"/></svg></a>
-          <a class="btn btn--ghost btn--lg" id="wa-gustavo" href="https://wa.me/5519971715232" target="_blank" rel="noopener"><span data-i18n="contact.waG"></span><svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M5 3h8v8"/></svg></a>
-          <a class="contact__mail mono" id="mail" href="mailto:kauaespind@gmail.com,gustavo.clati@gmail.com"><span data-i18n="contact.email"></span> ↗</a>
+
+        <div class="direct">
+          <p class="direct__title mono" data-i18n="contact.direct.title"></p>
+          <a class="direct__item" id="direct-wa" href="https://wa.me/5519996691034" target="_blank" rel="noopener"><span class="mono" data-i18n="contact.direct.wa"></span><b>(19) 99669-1034</b><i aria-hidden="true">↗</i></a>
+          <a class="direct__item" id="direct-mail" href="mailto:equipenokra@gmail.com"><span class="mono" data-i18n="contact.direct.mail"></span><b>equipenokra@gmail.com</b><i aria-hidden="true">↗</i></a>
+          <a class="direct__item" id="direct-ig" href="https://www.instagram.com/nokra.dev/" target="_blank" rel="noopener"><span class="mono" data-i18n="contact.direct.ig"></span><b>@nokra.dev</b><i aria-hidden="true">↗</i></a>
         </div>
       </div>
     </section>
@@ -457,7 +364,12 @@
     </div>
   </footer>
 
-  <script src="js/i18n.js?v=8"></script>
-  <script src="js/app.js?v=8"></script>
+  <!-- floating WhatsApp: shows after the hero, hides at the contact section -->
+  <a class="wa-float" id="wa-float" href="https://wa.me/5519996691034" target="_blank" rel="noopener" data-i18n-aria="a11y.wa">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path class="b" d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3.2 20.8l4.5-1.2A8.8 8.8 0 1 0 12 3.2z"/><path class="h" d="M8.9 7.6c.3-.3.8-.3 1 .1l1 1.8c.2.3.1.7-.2 1l-.6.6c.6 1.3 1.6 2.3 2.9 2.9l.6-.6c.3-.3.7-.3 1-.2l1.8 1c.4.2.4.7.1 1l-.8.9c-.5.5-1.3.7-2 .4a9.6 9.6 0 0 1-5.1-5.1c-.3-.7-.1-1.5.4-2z"/></svg>
+  </a>
+
+  <script src="js/i18n.js?v=10"></script>
+  <script src="js/app.js?v=10"></script>
 </body>
 </html>

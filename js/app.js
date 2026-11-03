@@ -1,6 +1,6 @@
 /* ==========================================================================
    NOKRA — app runtime
-   brand · i18n engine · smart routing · hero stack · project cards · live simulator · contact
+   brand · i18n engine · smart routing · hero stack · project cards · manifesto · method · contact preview
    ========================================================================== */
 (() => {
   "use strict";
@@ -11,15 +11,11 @@
   const LOCALE = { pt: "pt-BR", en: "en-US", it: "it-IT", es: "es-ES" };
   const HTML_LANG = { pt: "pt-BR", en: "en", it: "it", es: "es" };
   const OG_LOCALE = { pt: "pt_BR", en: "en_US", it: "it_IT", es: "es_ES" };
-  const UI_CURRENCY = { pt: "BRL", en: "USD", it: "EUR", es: "EUR" };
   const STORAGE_KEY = "gf.lang";
   const SWITCH_MS = 150;
 
-  const CONTACT = {
-    waKaua: "5519996691034",
-    waGustavo: "5519971715232",
-    emails: ["kauaespind@gmail.com", "gustavo.clati@gmail.com"]
-  };
+  // one door in: Kauã handles every first contact
+  const CONTACT = { wa: "5519996691034", email: "equipenokra@gmail.com" };
 
   const root = document.documentElement;
   const $ = (s, c = document) => c.querySelector(s);
@@ -134,9 +130,8 @@
     updateLangControls();
     renderClock();
     renderWorks();
-    renderStock();
-    renderPy();
-    renderWfCode();
+    renderStatement();
+    renderSteps();
     renderContact();
   }
 
@@ -160,14 +155,6 @@
   }
 
   /* ====================================================================
-     FORMATTERS
-     ==================================================================== */
-  const money = (v, currency = UI_CURRENCY[lang], digits = 2) =>
-    new Intl.NumberFormat(LOCALE[lang], { style: "currency", currency, minimumFractionDigits: digits, maximumFractionDigits: digits }).format(v);
-  const num = (v, digits = 0) =>
-    new Intl.NumberFormat(LOCALE[lang], { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(v);
-
-  /* ====================================================================
      STATUS BAR CLOCK (São Paulo)
      ==================================================================== */
   function renderClock() {
@@ -182,14 +169,33 @@
      ==================================================================== */
   const BEHANCE = "https://www.behance.net/gallery/";
   const WORKS = [
-    { by: "k", tags: ["PHP", "MySQL", "JavaScript"], links: [["site", "https://kbyte-show.vercel.app/"]] },
-    { by: "k", tags: ["TypeScript", "CSS", "JavaScript"], links: [["site", "https://iron-park.vercel.app/"]] },
-    { by: "g", tags: ["React", "UI/UX"], links: [["behance", `${BEHANCE}245383311/Rivlo-AI-Powered-Fitness-Training-Platform-Website`]] },
-    { by: "g", tags: ["Web design", "UI/UX"], links: [["behance", `${BEHANCE}245382843/Aurora-Contabil-Institutional-Website-Design`]] },
-    { by: "k", tags: ["HTML", "CSS", "JavaScript"], links: [["site", "https://pizzaria-rest.vercel.app/", "La Forno"], ["site", "https://restaurante-net.vercel.app/", "Lumina"]] },
-    { by: "k", tags: ["Python", "Git"], links: [["code", "https://github.com/kaua-espindola/ComunaCheck-main"]] }
+    { by: "k", img: "kbyte", host: "kbyte-show.vercel.app", tags: ["PHP", "MySQL", "JavaScript"], links: [["site", "https://kbyte-show.vercel.app/"]] },
+    { by: "k", img: "ironpark", host: "iron-park.vercel.app", tags: ["TypeScript", "CSS", "JavaScript"], links: [["site", "https://iron-park.vercel.app/"]] },
+    { by: "g", img: "rivlo", host: "behance.net/gustavoclati", tags: ["React", "UI/UX"], links: [["behance", `${BEHANCE}245383311/Rivlo-AI-Powered-Fitness-Training-Platform-Website`]] },
+    { by: "g", img: "aurora", host: "behance.net/gustavoclati", tags: ["Web design", "UI/UX"], links: [["behance", `${BEHANCE}245382843/Aurora-Contabil-Institutional-Website-Design`]] },
+    { by: "k", img: "food", host: "pizzaria-rest · restaurante-net", tags: ["HTML", "CSS", "JavaScript"], links: [["site", "https://pizzaria-rest.vercel.app/", "La Forno"], ["site", "https://restaurante-net.vercel.app/", "Lumina"]] },
+    { by: "k", term: true, host: "~/comunacheck", tags: ["Python", "Git"], links: [["code", "https://github.com/kaua-espindola/ComunaCheck-main"]] }
   ];
   const AUTHOR = { k: "Kauã", g: "Gustavo" };
+  // ComunaCheck has no screen: show what the script really prints
+  const TERM = [
+    "$ python rastreador.py",
+    "--- COMUNACHECK: BUSCA REGIONAL ---",
+    "Varrendo: ribeirao-preto-franca...",
+    "Varrendo: sao-carlos-araraquara...",
+    "Varrendo: campinas-regiao...",
+    "Analisando manchetes com Gemini 2.5 Flash...",
+    "✅ Relatório consolidado em 'relatorio_comunidade.txt'"
+  ];
+
+  function workMedia(meta) {
+    const bar = `<span class="work__bar mono"><i></i><i></i><i></i><span>${esc(meta.host)}</span></span>`;
+    if (meta.term) {
+      const lines = TERM.map((l, i) => `<p style="--i:${i}" class="${i === 0 ? "cmd" : i === TERM.length - 1 ? "ok" : ""}">${esc(l)}</p>`).join("");
+      return `<div class="work__media work__media--term" aria-hidden="true">${bar}<div class="term mono">${lines}<p class="term__cur" style="--i:${TERM.length}"><span></span></p></div></div>`;
+    }
+    return `<a class="work__media" href="${esc(meta.links[0][1])}" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">${bar}<span class="work__shot"><img src="img/work-${meta.img}.webp" alt="" width="1200" height="750" loading="lazy" decoding="async"></span></a>`;
+  }
 
   function renderWorks() {
     const items = t("projects.items");
@@ -197,18 +203,20 @@
     wrap.innerHTML = items.map((w, i) => {
       const meta = WORKS[i];
       const links = meta.links.map(([type, url, label]) =>
-        `<a class="work__link mono" href="${esc(url)}" target="_blank" rel="noopener">${esc(label ? `${label}` : t(`projects.links.${type}`))}<span aria-hidden="true">↗</span></a>`).join("");
+        `<a class="work__link mono" href="${esc(url)}" target="_blank" rel="noopener">${esc(label || t(`projects.links.${type}`))}<span aria-hidden="true">↗</span></a>`).join("");
       return `
-      <article class="work" id="work-${pad(i + 1)}">
-        <div class="work__top mono"><span><b>${pad(i + 1)}</b> · ${esc(w.cat)}</span><span>${esc(t("projects.by"))} ${esc(AUTHOR[meta.by])}</span></div>
-        <span class="work__big" aria-hidden="true">${pad(i + 1)}</span>
-        <h3 class="work__title">${esc(w.title)}</h3>
-        <p class="work__desc">${esc(w.desc)}</p>
-        <div class="work__foot"><ul class="tags mono">${meta.tags.map((x) => `<li>${esc(x)}</li>`).join("")}</ul><div class="work__links">${links}</div></div>
+      <article class="work${i < 2 ? " work--feat" : ""}" id="work-${pad(i + 1)}">
+        ${workMedia(meta)}
+        <div class="work__body">
+          <div class="work__top mono"><span><b>${pad(i + 1)}</b> · ${esc(w.cat)}</span><span>${esc(t("projects.by"))} ${esc(AUTHOR[meta.by])}</span></div>
+          <h3 class="work__title">${esc(w.title)}</h3>
+          <p class="work__desc">${esc(w.desc)}</p>
+          <div class="work__foot"><ul class="tags mono">${meta.tags.map((x) => `<li>${esc(x)}</li>`).join("")}</ul><div class="work__links">${links}</div></div>
+        </div>
       </article>`;
     }).join("");
     // cards are re-rendered on language switch — only animate them the first time
-    if (!worksSeen) $$(".work", wrap).forEach((el, i) => armReveal(el, "up", i % 2));
+    if (!worksSeen) $$(".work", wrap).forEach((el, i) => armReveal(el, "up", i < 2 ? 0 : i % 2));
   }
 
   // cards lean towards the cursor and a soft light follows it
@@ -220,11 +228,12 @@
       if (!card) return;
       const r = card.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      const k = card.classList.contains("work--feat") ? 2.4 : 6; // wide cards lean less
       card.classList.add("is-tilting");
       card.style.setProperty("--mx", `${(x * 100).toFixed(1)}%`);
       card.style.setProperty("--my", `${(y * 100).toFixed(1)}%`);
-      card.style.setProperty("--ry", `${((x - 0.5) * 6).toFixed(2)}deg`);
-      card.style.setProperty("--rx", `${((0.5 - y) * 6).toFixed(2)}deg`);
+      card.style.setProperty("--ry", `${((x - 0.5) * k).toFixed(2)}deg`);
+      card.style.setProperty("--rx", `${((0.5 - y) * k).toFixed(2)}deg`);
     });
     wrap.addEventListener("pointerout", (e) => {
       const card = e.target.closest(".work");
@@ -236,34 +245,66 @@
   }
 
   /* ====================================================================
-     SIMULATOR · tabs
+     MANIFESTO · orange band: the statement rises word by word,
+     the big // drifts while the band crosses the screen
      ==================================================================== */
-  function initTabs() {
-    const tabs = $$(".sim__tab");
-    const points = $$(".simlab__pt");
-    const activate = (tab, focus = false) => {
-      tabs.forEach((tb) => {
-        const on = tb === tab;
-        tb.classList.toggle("is-active", on);
-        tb.setAttribute("aria-selected", String(on));
-        tb.tabIndex = on ? 0 : -1;
-        $(`#${tb.getAttribute("aria-controls")}`).hidden = !on;
-      });
-      points.forEach((p) => p.classList.toggle("is-active", p.dataset.goto === tab.id));
-      if (focus) tab.focus();
+  function renderStatement() {
+    const el = $("#band-statement");
+    if (!el) return;
+    // words between [brackets] in the dictionary are highlighted
+    let hl = false;
+    el.innerHTML = t("manifesto.quote").split(" ").map((raw, i) => {
+      let word = raw;
+      if (word.startsWith("[")) { hl = true; word = word.slice(1); }
+      let html = esc(word);
+      if (hl) {
+        const end = word.indexOf("]");
+        // punctuation after the closing bracket stays in the normal colour
+        html = end === -1 ? `<b class="hl">${esc(word)}</b>` : `<b class="hl">${esc(word.slice(0, end))}</b>${esc(word.slice(end + 1))}`;
+        if (end !== -1) hl = false;
+      }
+      return `<span class="w"><span style="--w:${i}">${html}</span></span>`;
+    }).join(" ");
+  }
+
+  function initBand() {
+    const band = $("#manifesto");
+    if (!band) return;
+    if (!("IntersectionObserver" in window)) { band.classList.add("is-in"); return; }
+    const io = new IntersectionObserver((en) => {
+      if (!en[0].isIntersecting) return;
+      band.classList.add("is-in");
+      io.disconnect();
+    }, { threshold: 0.3 });
+    io.observe(band);
+    if (reduceMotion) return;
+    const mark = $(".band__slashes", band);
+    let ticking = false;
+    const move = () => {
+      const r = band.getBoundingClientRect();
+      const p = (window.innerHeight - r.top) / (window.innerHeight + r.height);
+      mark.style.setProperty("--bp", Math.max(0, Math.min(1, p)).toFixed(3));
+      ticking = false;
     };
-    // the numbered list beside the simulator drives the same tabs
-    points.forEach((p) => p.addEventListener("click", () => activate($(`#${p.dataset.goto}`))));
-    tabs.forEach((tb, i) => {
-      tb.addEventListener("click", () => activate(tb));
-      tb.addEventListener("keydown", (e) => {
-        if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
-          e.preventDefault();
-          const n = (i + (e.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
-          activate(tabs[n], true);
-        }
-      });
-    });
+    window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(move); } }, { passive: true });
+    move();
+  }
+
+  /* ====================================================================
+     METHOD · four steps (text in i18n `method.steps`)
+     ==================================================================== */
+  let stepsSeen = false;
+  function renderSteps() {
+    const wrap = $("#steps");
+    if (!wrap) return;
+    wrap.innerHTML = t("method.steps").map((st, i) => `
+      <li class="step">
+        <span class="step__n mono"><i></i>${pad(i + 1)}</span>
+        <h3 class="step__t">${esc(st.t)}</h3>
+        <p class="step__d">${esc(st.d)}</p>
+        <ul class="step__tags mono">${st.tags.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>
+      </li>`).join("");
+    if (!stepsSeen) $$(".step", wrap).forEach((el, i) => armReveal(el, "up", 1 + i * 2));
   }
 
   /* ====================================================================
@@ -345,285 +386,11 @@
   }
 
   /* ====================================================================
-     SIMULATOR · Tab 1 — wireframe → UI
+     CONTACT · business name + project type → live preview, and the
+     WhatsApp / e-mail links carry a pre-filled message
      ==================================================================== */
-  const wf = { value: 55, userTouched: false };
-
-  function setReveal(v) {
-    wf.value = Math.max(0, Math.min(100, v));
-    $("#wf-mock").style.setProperty("--reveal", `${wf.value}%`);
-    $("#wf-range").value = String(Math.round(wf.value));
-    renderWfCode();
-  }
-
-  function renderWfCode() {
-    const el = $("#wf-code");
-    if (!el) return;
-    const v = wf.value;
-    if (v < 30) {
-      el.innerHTML = `<span class="c-attr">◇</span> ${esc(t("sim.web.figma"))}`;
-    } else if (v < 80) {
-      el.innerHTML = `<span class="c-tag">&lt;section</span> <span class="c-attr">class</span>=<span class="c-str">"grid md:grid-cols-2 gap-6 px-6 py-8"</span><span class="c-tag">&gt;</span>`;
-    } else {
-      el.innerHTML = `<span class="c-ok">✓</span> ${esc(t("sim.web.status"))}`;
-    }
-  }
-
-  function initWireframe() {
-    const range = $("#wf-range");
-    range.addEventListener("input", () => { wf.userTouched = true; setReveal(Number(range.value)); });
-
-    // drag directly on the mock
-    const mock = $("#wf-mock");
-    let dragging = false;
-    const fromPointer = (e) => {
-      const r = mock.getBoundingClientRect();
-      setReveal(((e.clientX - r.left) / r.width) * 100);
-    };
-    mock.addEventListener("pointerdown", (e) => { dragging = true; wf.userTouched = true; mock.setPointerCapture(e.pointerId); fromPointer(e); });
-    mock.addEventListener("pointermove", (e) => { if (dragging) fromPointer(e); });
-    mock.addEventListener("pointerup", () => { dragging = false; });
-    mock.addEventListener("pointercancel", () => { dragging = false; });
-    mock.style.touchAction = "pan-y";
-
-    $$("#wf-device button").forEach((b) => b.addEventListener("click", () => {
-      $$("#wf-device button").forEach((x) => x.classList.toggle("is-active", x === b));
-      mock.classList.toggle("is-mobile", b.dataset.device === "mobile");
-    }));
-
-    // one-time intro sweep when the simulator enters the viewport
-    if (reduceMotion) return;
-    const io = new IntersectionObserver((entries) => {
-      if (!entries[0].isIntersecting) return;
-      io.disconnect();
-      const keys = [[0, 55], [700, 4], [1700, 100], [2700, 55]];
-      const start = performance.now();
-      const ease = (x) => 1 - Math.pow(1 - x, 3);
-      const step = (now) => {
-        if (wf.userTouched) return;
-        const el = now - start;
-        let i = keys.findIndex((k, idx) => idx < keys.length - 1 && el >= k[0] && el < keys[idx + 1][0]);
-        if (i === -1) { setReveal(keys[keys.length - 1][1]); return; }
-        const [t0, v0] = keys[i], [t1, v1] = keys[i + 1];
-        setReveal(v0 + (v1 - v0) * ease((el - t0) / (t1 - t0)));
-        requestAnimationFrame(step);
-      };
-      setTimeout(() => requestAnimationFrame(step), 400);
-    }, { threshold: 0.5 });
-    io.observe(mock);
-  }
-
-  /* ====================================================================
-     SIMULATOR · Tab 2 — inventory system
-     ==================================================================== */
-  const stock = {
-    items: [
-      { id: 1, seed: 0, qty: 12, price: 389.9 },
-      { id: 2, seed: 1, qty: 3, price: 219.0 },
-      { id: 3, seed: 2, qty: 48, price: 24.9 },
-      { id: 4, seed: 3, qty: 2, price: 39.9 }
-    ],
-    nextId: 5,
-    sales: 0,
-    salesValue: 0,
-    log: [{ k: "logReady" }],
-    flashId: null,
-    bump: []
-  };
-  const LOW_LIMIT = 3;
-  const itemName = (it) => (it.seed != null ? t("sim.stock.seed")[it.seed] : it.name);
-
-  function stockLog(entry) {
-    stock.log.push(entry);
-    if (stock.log.length > 3) stock.log.shift();
-  }
-
-  function renderStock() {
-    const body = $("#stk-body");
-    if (!body) return;
-    body.innerHTML = stock.items.map((it) => {
-      const low = it.qty <= LOW_LIMIT;
-      return `<tr class="${it.id === stock.flashId ? "flash" : ""}">
-        <td class="id">#${pad(it.id, 3)}</td>
-        <td class="name" title="${esc(itemName(it))}">${esc(itemName(it))}<span class="badge ${low ? "badge--low" : "badge--ok"}">${esc(t(low ? "sim.stock.low" : "sim.stock.ok"))}</span></td>
-        <td class="num">${num(it.qty)}</td>
-        <td class="num">${money(it.price)}</td>
-        <td><span class="act">
-          <button type="button" data-act="sell" data-id="${it.id}" ${it.qty === 0 ? "disabled" : ""}>${esc(t("sim.stock.sell"))}</button>
-          <button type="button" data-act="restock" data-id="${it.id}">${esc(t("sim.stock.restock"))}</button>
-        </span></td>
-      </tr>`;
-    }).join("");
-    stock.flashId = null;
-
-    const totalQty = stock.items.reduce((s, i) => s + i.qty, 0);
-    const totalVal = stock.items.reduce((s, i) => s + i.qty * i.price, 0);
-    const lowCount = stock.items.filter((i) => i.qty <= LOW_LIMIT).length;
-    const kpis = {
-      "kpi-items": num(totalQty),
-      "kpi-value": money(totalVal, undefined, 0),
-      "kpi-sales": `${stock.sales} · ${money(stock.salesValue, undefined, 0)}`,
-      "kpi-low": pad(lowCount)
-    };
-    Object.entries(kpis).forEach(([id, v]) => {
-      const el = $(`#${id}`);
-      if (el.textContent !== v && stock.bump.includes(id)) {
-        el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump");
-      }
-      el.textContent = v;
-    });
-    stock.bump = [];
-
-    $("#stk-log").innerHTML = stock.log.map((l) => {
-      const msg = esc(t(`sim.stock.${l.k}`)) + (l.extra ? ` <span>${esc(l.extra)}</span>` : "");
-      return `<p><span class="${l.err ? "err" : "pr"}">mysql&gt;</span> ${msg}</p>`;
-    }).join("");
-  }
-
-  function initStock() {
-    const form = $("#stk-form");
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const name = $("#stk-name").value.trim();
-      const qty = parseInt($("#stk-qty").value, 10);
-      const price = parseFloat(String($("#stk-price").value).replace(",", "."));
-      if (!name || !Number.isFinite(qty) || qty < 0 || !Number.isFinite(price) || price < 0) {
-        form.classList.add("is-invalid");
-        stockLog({ k: "invalid", err: true });
-        renderStock();
-        return;
-      }
-      form.classList.remove("is-invalid");
-      const id = stock.nextId++;
-      stock.items.unshift({ id, seed: null, name, qty, price });
-      stock.flashId = id;
-      stock.bump = ["kpi-items", "kpi-value", "kpi-low"];
-      stockLog({ k: "logInsert", extra: `(#${pad(id, 3)}, '${name.slice(0, 18)}', ${qty}, ${price.toFixed(2)})` });
-      form.reset();
-      renderStock();
-      $(".stk__table-wrap").scrollTop = 0;
-      $("#stk-name").focus();
-    });
-
-    $("#stk-body").addEventListener("click", (e) => {
-      const btn = e.target.closest("button[data-act]");
-      if (!btn) return;
-      const it = stock.items.find((i) => i.id === Number(btn.dataset.id));
-      if (!it) return;
-      if (btn.dataset.act === "sell" && it.qty > 0) {
-        it.qty -= 1;
-        stock.sales += 1;
-        stock.salesValue += it.price;
-        stockLog({ k: "logSale", extra: `#${pad(it.id, 3)}` });
-        stock.bump = ["kpi-items", "kpi-value", "kpi-sales", "kpi-low"];
-      } else if (btn.dataset.act === "restock") {
-        it.qty += 5;
-        stockLog({ k: "logRestock", extra: `#${pad(it.id, 3)}` });
-        stock.bump = ["kpi-items", "kpi-value", "kpi-low"];
-      }
-      stock.flashId = it.id;
-      renderStock();
-    });
-  }
-
-  /* ====================================================================
-     SIMULATOR · Tab 3 — Python routine
-     ==================================================================== */
-  const PY_RAW = [
-    { c: ["12/03/26", "  JOÃO silva ", "marketplace", "1.250,00"], issue: null },
-    { c: ["2026-03-12", "Ana Prado", "LOJA", "R$ 89,9"], issue: "format" },
-    { c: ["12/03/26", "  JOÃO silva ", "marketplace", "1.250,00"], issue: "dup" },
-    { c: ["", "carlos M.", "ecommerce", ""], issue: "missing" },
-    { c: ["13-03-2026", "BRUNA k", "whatsapp", "\"340\""], issue: "format" },
-    { c: ["14/03/26", "Luca Romano", "Marketplace ", "€ 75.00"], issue: "format" },
-    { c: ["14/03/26", "luca romano", "marketplace", "75"], issue: "dup" },
-    { c: ["15/03/26", "Marta Ruiz", "e-commerce", "212,40"], issue: null }
-  ];
-  const PY_RESULT = [
-    { orders: 412, revenue: 48320.5 },
-    { orders: 268, revenue: 21940.0 },
-    { orders: 351, revenue: 39115.8 },
-    { orders: 216, revenue: 14602.3 }
-  ];
-  const py = { phase: "idle", step: 0 };
-  let pyTimer = null;
-
-  function renderPy() {
-    const logs = t("sim.py.logs");
-    const total = logs.length;
-
-    // raw sheet
-    const scanning = py.phase === "running" && py.step >= 1 && py.step <= 3;
-    const fixed = py.phase === "done" || (py.phase === "running" && py.step >= 4);
-    $("#py-raw").innerHTML =
-      `<div class="raw-row raw-row--h"><span class="cells">${esc(t("sim.py.header"))}</span></div>` +
-      PY_RAW.map((r, i) => {
-        const cls = ["raw-row"];
-        if (r.issue) cls.push(fixed ? "is-fixed" : "has-issue");
-        if (scanning && i % 3 === py.step % 3) cls.push("is-scanning");
-        const flag = r.issue ? `<span class="flag">${esc(t(`sim.py.issues.${r.issue}`))}</span>` : "";
-        return `<div class="${cls.join(" ")}"><span class="cells">${esc(r.c.join(";"))}</span>${flag}</div>`;
-      }).join("");
-
-    // output
-    const out = $("#py-out");
-    if (py.phase === "done") {
-      const ch = t("sim.py.channels");
-      const max = Math.max(...PY_RESULT.map((r) => r.revenue));
-      const totOrders = PY_RESULT.reduce((s, r) => s + r.orders, 0);
-      const totRev = PY_RESULT.reduce((s, r) => s + r.revenue, 0);
-      out.innerHTML = `
-        <table class="out-table">
-          <thead><tr><th>${esc(t("sim.py.colChannel"))}</th><th class="r">${esc(t("sim.py.colOrders"))}</th><th class="r">${esc(t("sim.py.colRevenue"))}</th></tr></thead>
-          <tbody>${PY_RESULT.map((r, i) => `<tr><td>${esc(ch[i])}</td><td class="r">${num(r.orders)}</td><td class="r">${num(r.revenue, 2)}</td></tr>`).join("")}</tbody>
-          <tfoot><tr><td>${esc(t("sim.py.total"))}</td><td class="r">${num(totOrders)}</td><td class="r">${num(totRev, 2)}</td></tr></tfoot>
-        </table>
-        <div class="out-bars">${PY_RESULT.map((r, i) => `<div class="out-bar"><span>${esc(ch[i])}</span><i style="width:${((r.revenue / max) * 100).toFixed(1)}%;animation-delay:${i * 90}ms"></i></div>`).join("")}</div>`;
-    } else {
-      out.innerHTML = `<div class="py__placeholder"><span class="sk"></span><span class="sk"></span><span class="sk"></span><span>${esc(t("sim.py.waiting"))}</span></div>`;
-    }
-
-    // terminal
-    const term = $("#py-term");
-    if (py.phase === "idle") {
-      term.innerHTML = `<p class="idle">${esc(t("sim.py.idle"))} <span class="cursor"></span></p>`;
-    } else {
-      term.innerHTML = logs.slice(0, py.step).map((l, i) => {
-        const cls = i === 0 ? "cmd" : (i === total - 1 ? "done" : "");
-        return `<p class="${cls}">${esc(l)}</p>`;
-      }).join("") + (py.phase === "running" ? `<p><span class="cursor"></span></p>` : "");
-      term.scrollTop = term.scrollHeight;
-    }
-
-    // controls
-    const pct = py.phase === "idle" ? 0 : Math.round((py.step / total) * 100);
-    $("#py-progress").style.transform = `scaleX(${pct / 100})`;
-    $("#py-pct").textContent = `${pct}%`;
-    const btn = $("#py-run");
-    btn.disabled = py.phase === "running";
-    $("#py-run-label").textContent = t(py.phase === "running" ? "sim.py.running" : py.phase === "done" ? "sim.py.rerun" : "sim.py.run");
-  }
-
-  function runPy() {
-    if (py.phase === "running") return;
-    clearTimeout(pyTimer);
-    py.phase = "running";
-    py.step = 0;
-    renderPy();
-    const total = t("sim.py.logs").length;
-    const tick = () => {
-      py.step += 1;
-      if (py.step >= total) { py.step = total; py.phase = "done"; }
-      renderPy();
-      if (py.phase === "running") pyTimer = setTimeout(tick, 360 + Math.random() * 280);
-    };
-    pyTimer = setTimeout(tick, 260);
-  }
-
-  /* ====================================================================
-     CONTACT · pick a project type, links carry a pre-filled message
-     ==================================================================== */
-  const contact = { type: "site" };
+  const contact = { type: "site", name: "" };
+  const slugify = (v) => v.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "");
 
   function renderContact() {
     $$(".chip").forEach((c) => {
@@ -632,19 +399,55 @@
       c.setAttribute("aria-pressed", String(on));
     });
     const typeName = t(`contact.types.${contact.type}`);
-    const msg = t("contact.msg", { type: typeName.toLowerCase() });
-    $("#wa-kaua").href = `https://wa.me/${CONTACT.waKaua}?text=${encodeURIComponent(msg)}`;
-    $("#wa-gustavo").href = `https://wa.me/${CONTACT.waGustavo}?text=${encodeURIComponent(msg)}`;
-    $("#mail").href = `mailto:${CONTACT.emails.join(",")}?subject=${encodeURIComponent(t("contact.subject", { type: typeName }))}&body=${encodeURIComponent(msg)}`;
+    const name = contact.name.trim();
+    const msg = t(name ? "contact.msgNamed" : "contact.msg", { type: typeName.toLowerCase(), name });
+    const wa = `https://wa.me/${CONTACT.wa}?text=${encodeURIComponent(msg)}`;
+    $("#wa-team").href = wa;
+    $("#wa-float").href = wa;
+    $("#mail").href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(t("contact.subject", { type: typeName }))}&body=${encodeURIComponent(msg)}`;
+    renderPreview();
+  }
+
+  function renderPreview() {
+    const pv = $("#pv");
+    const name = contact.name.trim();
+    const shown = name || t("contact.nameFallback");
+    pv.className = `pv pv--${contact.type}${name ? "" : " is-empty"}`;
+    pv.style.setProperty("--len", Math.max(6, shown.length));
+    $("#pv-url").textContent = `${slugify(shown) || "nokra"}${t("contact.domain")}`;
+    ["#pv-logo", "#pv-name", "#pv-foot"].forEach((sel) => { $(sel).textContent = shown; });
+    $("#pv-k").textContent = t(`contact.preview.${contact.type}.k`);
+    $("#pv-s").textContent = t(`contact.preview.${contact.type}.s`);
+    $("#pv-b").textContent = t(`contact.preview.${contact.type}.b`);
   }
 
   function initContact() {
+    const body = $("#pv-body");
     $("#contact-types").addEventListener("click", (e) => {
       const chip = e.target.closest(".chip");
-      if (!chip) return;
+      if (!chip || chip.dataset.type === contact.type) return;
       contact.type = chip.dataset.type;
       renderContact();
+      // replay the little "page loads" animation on the preview
+      body.classList.remove("is-swap"); void body.offsetWidth; body.classList.add("is-swap");
     });
+    $("#biz-name").addEventListener("input", (e) => { contact.name = e.target.value; renderContact(); });
+  }
+
+  // floating WhatsApp: only after the hero, and out of the way at the contact section / footer
+  function initWaFloat() {
+    const btn = $("#wa-float"), hero = $("#inicio"), end = $("#contato");
+    if (!btn || !hero || !end) return;
+    const update = () => {
+      const vh = window.innerHeight;
+      const pastHero = hero.getBoundingClientRect().bottom < vh * 0.35;
+      const atEnd = end.getBoundingClientRect().top < vh * 0.85; // contact + footer below it
+      btn.classList.toggle("is-on", pastHero && !atEnd);
+    };
+    // two rect reads per scroll event: cheap enough to run directly
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update, { passive: true });
+    update();
   }
 
   /* ====================================================================
@@ -674,7 +477,7 @@
         if (l) l.classList.add("is-current");
       });
     }, { rootMargin: "-45% 0px -50% 0px" });
-    ["servicos", "projetos", "simulador", "sobre", "contato"].forEach((id) => { const el = document.getElementById(id); if (el) spy.observe(el); });
+    ["servicos", "projetos", "metodo", "sobre", "contato"].forEach((id) => { const el = document.getElementById(id); if (el) spy.observe(el); });
   }
 
   function initMagnetic() {
@@ -701,13 +504,18 @@
     [".sec-title", "clip", () => 0],
     [".sec-intro", "up", () => 2],
     [".service", "up", (i) => i],
-    [".simlab__stage", "up", () => 2],
+    [".band__aside", "up", () => 0],
+    [".band__cite", "fade", () => 8],
+    [".steps", "line", () => 0],
     [".person", "up", (i) => i * 2],
     [".about__shared", "fade", () => 3],
     [".contact__title", "clip", () => 0],
     [".contact__intro", "up", () => 2],
-    [".chips", "up", () => 3],
-    [".contact__actions", "up", () => 4],
+    [".contact__form .field", "up", (i) => 3 + i],
+    [".contact__actions", "up", () => 5],
+    [".pv", "up", () => 3],
+    [".direct__title", "fade", () => 0],
+    [".direct__item", "up", (i) => i + 1],
     [".footer__mark", "up", () => 0],
     [".footer__bottom", "fade", () => 2]
   ];
@@ -730,6 +538,7 @@
   function landReveal(el) {
     el.classList.add("in");
     if (el.classList.contains("work")) worksSeen = true;
+    if (el.classList.contains("step")) stepsSeen = true;
     // once landed, hand the element back to its own styles (hover transitions etc.)
     const d = Number(el.style.getPropertyValue("--d")) || 0;
     setTimeout(() => {
@@ -859,14 +668,12 @@
     lang = detectLang();
 
     $$("[data-lang]").forEach((b) => b.addEventListener("click", () => setLang(b.dataset.lang)));
-    $("#py-run").addEventListener("click", runPy);
 
     applyBrand();
     initHeroStack();
-    initTabs();
-    initWireframe();
-    initStock();
+    initBand();
     initContact();
+    initWaFloat();
     initWorksTilt();
     initHeader();
     initMagnetic();

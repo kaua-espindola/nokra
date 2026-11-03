@@ -7,13 +7,13 @@
 
 /* --------------------------------------------------------------------------
    BRAND — single source of truth. Rename the team here and the whole site
-   (header, footer wordmark, titles, simulator URL) follows.
+   (header, footer wordmark, titles) follows.
    -------------------------------------------------------------------------- */
 window.BRAND = {
   name: "Nokra",               // <title>, footer © line, aria labels
   lockup: ["nokra"],           // header wordmark (a 2nd item would render lighter, as a two-word logo)
   wordmark: "NOKRA",           // giant outlined footer type, preceded by the orange //
-  slug: "nokra"                // simulator fake URL
+  slug: "nokra"                // short id
 };
 // The // symbol itself is inline SVG in index.html (header) and favicon.svg.
 
@@ -27,8 +27,7 @@ window.TRANSLATIONS = {
     "a11y": {
       "lang": "Selecionar idioma",
       "menu": "Abrir menu de navegação",
-      "range": "Controle de compilação do wireframe",
-      "tabs": "Abas do simulador"
+      "wa": "Falar com a equipe no WhatsApp"
     },
     "status": {
       "status": "STATUS",
@@ -38,7 +37,7 @@ window.TRANSLATIONS = {
     "nav": {
       "services": "Serviços",
       "projects": "Projetos",
-      "sim": "Teste ao vivo",
+      "method": "Método",
       "about": "Sobre",
       "cta": "Fale com a gente"
     },
@@ -50,7 +49,7 @@ window.TRANSLATIONS = {
       "l2": "SISTEMA · DADOS",
       "l3": "ROTINA · PYTHON",
       "fig": "FIG. 01 — UMA INFRAESTRUTURA, TRÊS CAMADAS",
-      "index": "[01] — ESTÚDIO DE SOFTWARE",
+      "index": "// ESTÚDIO DE SOFTWARE",
       "sub": "Sites, sistemas e automações sob medida para empresas de todo o Brasil.",
       "ctaPrimary": "Ver projetos",
       "ctaSecondary": "Fale com a gente",
@@ -63,7 +62,7 @@ window.TRANSLATIONS = {
       "Design"
     ],
     "services": {
-      "index": "[02] — SERVIÇOS",
+      "index": "[01] — SERVIÇOS",
       "title": "Do site ao <em>sistema.</em>",
       "items": [
         {
@@ -85,8 +84,8 @@ window.TRANSLATIONS = {
       ]
     },
     "projects": {
-      "index": "[03] — PROJETOS",
-      "title": "Projetos.",
+      "index": "[02] — PROJETOS",
+      "title": "Projetos em <em>destaque.</em>",
       "intro": "Trabalhos publicados. Clique e veja funcionando.",
       "by": "por",
       "links": {
@@ -127,104 +126,58 @@ window.TRANSLATIONS = {
         }
       ]
     },
-    "sim": {
-      "index": "[04] — TESTE AO VIVO",
-      "title": "Teste ao vivo.",
-      "intro": "Três mini demonstrações rodando no seu navegador.",
-      "live": "AO VIVO",
-      "tabs": {
-        "web": "Web & Landing Pages",
-        "stock": "Sistemas & Estoque",
-        "py": "Automação Python"
-      },
-      "web": {
-        "hint": "Arraste o controle para compilar o wireframe em interface",
-        "wire": "WIREFRAME · FIGMA",
-        "ui": "INTERFACE · HTML/CSS/TAILWIND",
-        "desktop": "Desktop",
-        "mobile": "Mobile",
-        "brand": "Aurora Odonto",
-        "nav1": "Serviços",
-        "nav2": "Equipe",
-        "nav3": "Contato",
-        "heroTitle": "Agende sua avaliação em 30 segundos.",
-        "heroText": "Atendimento humanizado, horários flexíveis e confirmação imediata pelo WhatsApp.",
-        "cta": "Agendar agora",
-        "card1": "Implantes",
-        "card2": "Ortodontia",
-        "card3": "Clareamento",
-        "status": "build ok · responsivo · acessível",
-        "figma": "frame: Hero / Auto Layout 24 · Figma"
-      },
-      "stock": {
-        "title": "Painel de Estoque — v1.0",
-        "kItems": "Itens em estoque",
-        "kValue": "Valor do inventário",
-        "kSales": "Vendas hoje",
-        "kLow": "Alertas de baixa",
-        "fName": "Produto",
-        "fQty": "Qtd.",
-        "fPrice": "Preço",
-        "add": "Cadastrar",
-        "cProduct": "Produto",
-        "cQty": "Qtd.",
-        "cPrice": "Preço",
-        "cAct": "Ação",
-        "sell": "Vender",
-        "restock": "Repor",
-        "low": "BAIXO",
-        "ok": "OK",
-        "logReady": "Conectado a mysql://estoque — pronto.",
-        "logInsert": "INSERT INTO produtos",
-        "logSale": "UPDATE estoque SET qtd = qtd - 1 · venda registrada",
-        "logRestock": "UPDATE estoque SET qtd = qtd + 5 · reposição",
-        "invalid": "Preencha produto, quantidade e preço válidos.",
-        "seed": [
-          "Tela iPhone 11",
-          "Bateria Galaxy S21",
-          "Conector USB-C",
-          "Película 3D Privacidade"
-        ]
-      },
-      "py": {
-        "run": "Executar Rotina",
-        "running": "Executando…",
-        "rerun": "Executar novamente",
-        "raw": "ENTRADA · planilha bruta",
-        "clean": "SAÍDA · relatório limpo",
-        "idle": "Aguardando execução. Clique em “Executar Rotina”.",
-        "waiting": "aguardando dados…",
-        "colChannel": "Canal",
-        "colOrders": "Pedidos",
-        "colRevenue": "Receita",
-        "total": "Total",
-        "issues": {
-          "dup": "DUPLICADO",
-          "missing": "VAZIO",
-          "format": "FORMATO"
+    "manifesto": {
+      "label": "Manifesto",
+      "p1": "Muitas empresas ainda perdem oportunidades com sites lentos, processos manuais e informações espalhadas em planilhas.",
+      "p2": "A {brand} desenvolve sites, sistemas e automações sob medida para resolver esses problemas, com acompanhamento em todas as etapas.",
+      "quote": "Projetos [sob medida], do planejamento à entrega, com a mesma equipe.",
+      "cite": "Manifesto {brand}"
+    },
+    "method": {
+      "index": "[03] — MÉTODO",
+      "title": "Da conversa <em>ao ar.</em>",
+      "intro": "Quatro etapas, com você acompanhando cada uma.",
+      "steps": [
+        {
+          "t": "Conversar",
+          "d": "Entendemos o seu negócio, o seu cliente e o que precisa mudar.",
+          "tags": [
+            "Briefing",
+            "Objetivos",
+            "Referências"
+          ]
         },
-        "header": "data;cliente;canal;valor",
-        "file": "vendas_brutas.xlsx",
-        "report": "relatorio_limpo.xlsx",
-        "channels": [
-          "Marketplace",
-          "Loja física",
-          "E-commerce",
-          "WhatsApp"
-        ],
-        "logs": [
-          "$ python rotina_relatorio.py --input vendas_brutas.xlsx",
-          "[1/5] Lendo planilha bruta… 1.284 linhas encontradas",
-          "[2/5] Removendo duplicatas… 37 registros descartados",
-          "[3/5] Normalizando datas, valores e nomes…",
-          "[4/5] Agrupando por canal de venda…",
-          "[5/5] Exportando relatorio_limpo.xlsx + dashboard.pdf",
-          "✓ Rotina concluída em 0,84 s — 1.247 linhas válidas"
-        ]
-      }
+        {
+          "t": "Planejar",
+          "d": "Definimos páginas, funções e prazo. Você aprova antes de começarmos.",
+          "tags": [
+            "Escopo",
+            "Wireframe",
+            "Prazo"
+          ]
+        },
+        {
+          "t": "Construir",
+          "d": "Design e código andam juntos, e você vê cada versão.",
+          "tags": [
+            "Design",
+            "Código",
+            "Testes"
+          ]
+        },
+        {
+          "t": "Entregar",
+          "d": "Colocamos no ar, ensinamos a usar e seguimos por perto.",
+          "tags": [
+            "Publicação",
+            "Treinamento",
+            "Suporte"
+          ]
+        }
+      ]
     },
     "about": {
-      "index": "[05] — SOBRE",
+      "index": "[04] — SOBRE",
       "title": "Quem está por trás.",
       "shared": "Ciência da Computação — UNIP · Santa Rita do Passa Quatro/SP",
       "k": {
@@ -238,19 +191,53 @@ window.TRANSLATIONS = {
       "portfolio": "Portfólio"
     },
     "contact": {
-      "index": "[06] — CONTATO",
-      "title": "Vamos tirar sua ideia do papel?",
-      "intro": "Escolha o tipo de projeto e chame no WhatsApp. Proposta sob medida e sem compromisso.",
+      "index": "[05] — CONTATO",
+      "title": "Seu negócio <em>no ar.</em>",
+      "intro": "Escreva o nome do seu negócio e veja uma prévia. O resto a gente constrói junto.",
+      "nameLabel": "Nome do seu negócio",
+      "namePh": "Ex.: Padaria Central",
+      "nameFallback": "Seu Negócio",
+      "typeLabel": "Que tipo de projeto?",
       "types": {
         "site": "Site",
         "landing": "Landing page",
         "system": "Sistema",
         "automation": "Automação"
       },
-      "waK": "Falar com Kauã",
-      "waG": "Falar com Gustavo",
-      "email": "Mandar e-mail",
-      "msg": "Olá, Kauã e Gustavo! Vim pelo site da {brand} e quero conversar sobre um projeto de {type}.",
+      "cta": "Falar com a equipe",
+      "email": "Prefiro e-mail",
+      "msg": "Olá! Vim pelo site da {brand} e quero conversar sobre um projeto de {type}.",
+      "msgNamed": "Olá! Vim pelo site da {brand}. Sou da {name} e quero conversar sobre um projeto de {type}.",
+      "previewTag": "PRÉVIA",
+      "domain": ".com.br",
+      "preview": {
+        "site": {
+          "k": "Bem-vindo",
+          "s": "Tudo o que o seu cliente precisa saber, num só lugar.",
+          "b": "Conheça"
+        },
+        "landing": {
+          "k": "Oferta especial",
+          "s": "Uma página feita para transformar visita em contato.",
+          "b": "Quero agora"
+        },
+        "system": {
+          "k": "Painel",
+          "s": "Vendas, estoque e clientes organizados num só sistema.",
+          "b": "Entrar"
+        },
+        "automation": {
+          "k": "Rotina automática",
+          "s": "Relatórios prontos todo dia, sem ninguém abrir planilha.",
+          "b": "Ver relatório"
+        }
+      },
+      "direct": {
+        "title": "Ou fale direto",
+        "wa": "WhatsApp",
+        "mail": "E-mail",
+        "ig": "Instagram"
+      },
       "subject": "Projeto de {type} — via site"
     },
     "footer": {
@@ -268,8 +255,7 @@ window.TRANSLATIONS = {
     "a11y": {
       "lang": "Select language",
       "menu": "Open navigation menu",
-      "range": "Wireframe compile control",
-      "tabs": "Simulator tabs"
+      "wa": "Talk to the team on WhatsApp"
     },
     "status": {
       "status": "STATUS",
@@ -279,7 +265,7 @@ window.TRANSLATIONS = {
     "nav": {
       "services": "Services",
       "projects": "Projects",
-      "sim": "Try it live",
+      "method": "Process",
       "about": "About",
       "cta": "Talk to us"
     },
@@ -291,7 +277,7 @@ window.TRANSLATIONS = {
       "l2": "SYSTEM · DATA",
       "l3": "ROUTINE · PYTHON",
       "fig": "FIG. 01 — ONE INFRASTRUCTURE, THREE LAYERS",
-      "index": "[01] — SOFTWARE STUDIO",
+      "index": "// SOFTWARE STUDIO",
       "sub": "Custom websites, systems and automation for businesses of any size.",
       "ctaPrimary": "See projects",
       "ctaSecondary": "Talk to us",
@@ -304,7 +290,7 @@ window.TRANSLATIONS = {
       "Design"
     ],
     "services": {
-      "index": "[02] — SERVICES",
+      "index": "[01] — SERVICES",
       "title": "From website to <em>system.</em>",
       "items": [
         {
@@ -326,8 +312,8 @@ window.TRANSLATIONS = {
       ]
     },
     "projects": {
-      "index": "[03] — PROJECTS",
-      "title": "Projects.",
+      "index": "[02] — PROJECTS",
+      "title": "Featured <em>projects.</em>",
       "intro": "Published work. Click and see it running.",
       "by": "by",
       "links": {
@@ -368,104 +354,58 @@ window.TRANSLATIONS = {
         }
       ]
     },
-    "sim": {
-      "index": "[04] — TRY IT LIVE",
-      "title": "Try it live.",
-      "intro": "Three mini demos running right in your browser.",
-      "live": "LIVE",
-      "tabs": {
-        "web": "Web & Landing Pages",
-        "stock": "Systems & Inventory",
-        "py": "Python Automation"
-      },
-      "web": {
-        "hint": "Drag the handle to compile the wireframe into a live interface",
-        "wire": "WIREFRAME · FIGMA",
-        "ui": "INTERFACE · HTML/CSS/TAILWIND",
-        "desktop": "Desktop",
-        "mobile": "Mobile",
-        "brand": "Aurora Dental",
-        "nav1": "Services",
-        "nav2": "Team",
-        "nav3": "Contact",
-        "heroTitle": "Book your check-up in 30 seconds.",
-        "heroText": "Caring service, flexible hours and instant confirmation on WhatsApp.",
-        "cta": "Book now",
-        "card1": "Implants",
-        "card2": "Orthodontics",
-        "card3": "Whitening",
-        "status": "build ok · responsive · accessible",
-        "figma": "frame: Hero / Auto Layout 24 · Figma"
-      },
-      "stock": {
-        "title": "Inventory Dashboard — v1.0",
-        "kItems": "Units in stock",
-        "kValue": "Inventory value",
-        "kSales": "Sales today",
-        "kLow": "Low-stock alerts",
-        "fName": "Product",
-        "fQty": "Qty",
-        "fPrice": "Price",
-        "add": "Add",
-        "cProduct": "Product",
-        "cQty": "Qty",
-        "cPrice": "Price",
-        "cAct": "Action",
-        "sell": "Sell",
-        "restock": "Restock",
-        "low": "LOW",
-        "ok": "OK",
-        "logReady": "Connected to mysql://inventory — ready.",
-        "logInsert": "INSERT INTO products",
-        "logSale": "UPDATE inventory SET qty = qty - 1 · sale recorded",
-        "logRestock": "UPDATE inventory SET qty = qty + 5 · restocked",
-        "invalid": "Please enter a valid product, quantity and price.",
-        "seed": [
-          "iPhone 11 Screen",
-          "Galaxy S21 Battery",
-          "USB-C Connector",
-          "3D Privacy Screen Protector"
-        ]
-      },
-      "py": {
-        "run": "Run Routine",
-        "running": "Running…",
-        "rerun": "Run again",
-        "raw": "INPUT · raw spreadsheet",
-        "clean": "OUTPUT · clean report",
-        "idle": "Waiting to run. Click “Run Routine”.",
-        "waiting": "waiting for data…",
-        "colChannel": "Channel",
-        "colOrders": "Orders",
-        "colRevenue": "Revenue",
-        "total": "Total",
-        "issues": {
-          "dup": "DUPLICATE",
-          "missing": "EMPTY",
-          "format": "FORMAT"
+    "manifesto": {
+      "label": "Manifesto",
+      "p1": "Many businesses still lose opportunities to slow websites, manual processes and information scattered across spreadsheets.",
+      "p2": "{brand} builds custom websites, systems and automation to solve these problems, with close follow-up at every stage.",
+      "quote": "[Custom-built] projects, from planning to delivery, by the same team.",
+      "cite": "{brand} manifesto"
+    },
+    "method": {
+      "index": "[03] — PROCESS",
+      "title": "From first call <em>to live.</em>",
+      "intro": "Four steps, and you follow each one.",
+      "steps": [
+        {
+          "t": "Listen",
+          "d": "We get to know your business, your customers and what needs to change.",
+          "tags": [
+            "Briefing",
+            "Goals",
+            "References"
+          ]
         },
-        "header": "date;customer;channel;amount",
-        "file": "raw_sales.xlsx",
-        "report": "clean_report.xlsx",
-        "channels": [
-          "Marketplace",
-          "Physical store",
-          "E-commerce",
-          "WhatsApp"
-        ],
-        "logs": [
-          "$ python report_routine.py --input raw_sales.xlsx",
-          "[1/5] Reading raw spreadsheet… 1,284 rows found",
-          "[2/5] Removing duplicates… 37 records dropped",
-          "[3/5] Normalizing dates, amounts and names…",
-          "[4/5] Grouping by sales channel…",
-          "[5/5] Exporting clean_report.xlsx + dashboard.pdf",
-          "✓ Routine finished in 0.84 s — 1,247 valid rows"
-        ]
-      }
+        {
+          "t": "Plan",
+          "d": "We define pages, features and timeline. You approve before we start.",
+          "tags": [
+            "Scope",
+            "Wireframe",
+            "Timeline"
+          ]
+        },
+        {
+          "t": "Build",
+          "d": "Design and code move together, and you see every version.",
+          "tags": [
+            "Design",
+            "Code",
+            "Testing"
+          ]
+        },
+        {
+          "t": "Launch",
+          "d": "We put it live, show you how to use it and stay close.",
+          "tags": [
+            "Launch",
+            "Training",
+            "Support"
+          ]
+        }
+      ]
     },
     "about": {
-      "index": "[05] — ABOUT",
+      "index": "[04] — ABOUT",
       "title": "Who's behind it.",
       "shared": "Computer Science — UNIP · São Paulo, Brazil",
       "k": {
@@ -479,19 +419,53 @@ window.TRANSLATIONS = {
       "portfolio": "Portfolio"
     },
     "contact": {
-      "index": "[06] — CONTACT",
-      "title": "Let's get your idea off the ground?",
-      "intro": "Pick the type of project and message us on WhatsApp. Tailored proposal, no strings attached.",
+      "index": "[05] — CONTACT",
+      "title": "Your business, <em>live.</em>",
+      "intro": "Type your business name and see a preview. We'll build the rest together.",
+      "nameLabel": "Your business name",
+      "namePh": "e.g. Central Bakery",
+      "nameFallback": "Your Business",
+      "typeLabel": "What kind of project?",
       "types": {
         "site": "Website",
         "landing": "Landing page",
         "system": "System",
         "automation": "Automation"
       },
-      "waK": "Talk to Kauã",
-      "waG": "Talk to Gustavo",
-      "email": "Send an e-mail",
-      "msg": "Hi Kauã and Gustavo! I found {brand}'s website and I'd like to talk about a {type} project.",
+      "cta": "Talk to the team",
+      "email": "I'd rather email",
+      "msg": "Hi! I found {brand}'s website and I'd like to talk about a {type} project.",
+      "msgNamed": "Hi! I found {brand}'s website. I'm from {name} and I'd like to talk about a {type} project.",
+      "previewTag": "PREVIEW",
+      "domain": ".com",
+      "preview": {
+        "site": {
+          "k": "Welcome",
+          "s": "Everything your customers need to know, in one place.",
+          "b": "Explore"
+        },
+        "landing": {
+          "k": "Special offer",
+          "s": "A page built to turn visits into leads.",
+          "b": "Get it now"
+        },
+        "system": {
+          "k": "Dashboard",
+          "s": "Sales, stock and customers in one system.",
+          "b": "Sign in"
+        },
+        "automation": {
+          "k": "Automated routine",
+          "s": "Reports ready every day, without opening a spreadsheet.",
+          "b": "View report"
+        }
+      },
+      "direct": {
+        "title": "Or reach us directly",
+        "wa": "WhatsApp",
+        "mail": "Email",
+        "ig": "Instagram"
+      },
       "subject": "{type} project — via website"
     },
     "footer": {
@@ -509,8 +483,7 @@ window.TRANSLATIONS = {
     "a11y": {
       "lang": "Seleziona la lingua",
       "menu": "Apri il menu di navigazione",
-      "range": "Controllo di compilazione del wireframe",
-      "tabs": "Schede del simulatore"
+      "wa": "Parla con il team su WhatsApp"
     },
     "status": {
       "status": "STATO",
@@ -520,7 +493,7 @@ window.TRANSLATIONS = {
     "nav": {
       "services": "Servizi",
       "projects": "Progetti",
-      "sim": "Prova dal vivo",
+      "method": "Metodo",
       "about": "Chi siamo",
       "cta": "Parliamone"
     },
@@ -532,7 +505,7 @@ window.TRANSLATIONS = {
       "l2": "SISTEMA · DATI",
       "l3": "ROUTINE · PYTHON",
       "fig": "FIG. 01 — UN'INFRASTRUTTURA, TRE LIVELLI",
-      "index": "[01] — STUDIO DI SOFTWARE",
+      "index": "// STUDIO DI SOFTWARE",
       "sub": "Siti web, sistemi e automazioni su misura per aziende di ogni dimensione.",
       "ctaPrimary": "Vedi i progetti",
       "ctaSecondary": "Parliamone",
@@ -545,7 +518,7 @@ window.TRANSLATIONS = {
       "Design"
     ],
     "services": {
-      "index": "[02] — SERVIZI",
+      "index": "[01] — SERVIZI",
       "title": "Dal sito al <em>gestionale.</em>",
       "items": [
         {
@@ -567,8 +540,8 @@ window.TRANSLATIONS = {
       ]
     },
     "projects": {
-      "index": "[03] — PROGETTI",
-      "title": "Progetti.",
+      "index": "[02] — PROGETTI",
+      "title": "Progetti in <em>evidenza.</em>",
       "intro": "Lavori pubblicati. Clicca e guardali funzionare.",
       "by": "di",
       "links": {
@@ -609,104 +582,58 @@ window.TRANSLATIONS = {
         }
       ]
     },
-    "sim": {
-      "index": "[04] — PROVA DAL VIVO",
-      "title": "Prova dal vivo.",
-      "intro": "Tre mini demo che girano direttamente nel tuo browser.",
-      "live": "DAL VIVO",
-      "tabs": {
-        "web": "Web & Landing Page",
-        "stock": "Gestionali & Magazzino",
-        "py": "Automazione Python"
-      },
-      "web": {
-        "hint": "Trascina il cursore per compilare il wireframe in interfaccia",
-        "wire": "WIREFRAME · FIGMA",
-        "ui": "INTERFACCIA · HTML/CSS/TAILWIND",
-        "desktop": "Desktop",
-        "mobile": "Mobile",
-        "brand": "Aurora Dental",
-        "nav1": "Servizi",
-        "nav2": "Team",
-        "nav3": "Contatti",
-        "heroTitle": "Prenota la tua visita in 30 secondi.",
-        "heroText": "Assistenza attenta, orari flessibili e conferma immediata su WhatsApp.",
-        "cta": "Prenota ora",
-        "card1": "Implantologia",
-        "card2": "Ortodonzia",
-        "card3": "Sbiancamento",
-        "status": "build ok · responsive · accessibile",
-        "figma": "frame: Hero / Auto Layout 24 · Figma"
-      },
-      "stock": {
-        "title": "Pannello Magazzino — v1.0",
-        "kItems": "Articoli in giacenza",
-        "kValue": "Valore inventario",
-        "kSales": "Vendite oggi",
-        "kLow": "Scorte basse",
-        "fName": "Prodotto",
-        "fQty": "Q.tà",
-        "fPrice": "Prezzo",
-        "add": "Registra",
-        "cProduct": "Prodotto",
-        "cQty": "Q.tà",
-        "cPrice": "Prezzo",
-        "cAct": "Azione",
-        "sell": "Vendi",
-        "restock": "Riordina",
-        "low": "BASSO",
-        "ok": "OK",
-        "logReady": "Connesso a mysql://magazzino — pronto.",
-        "logInsert": "INSERT INTO prodotti",
-        "logSale": "UPDATE magazzino SET qta = qta - 1 · vendita registrata",
-        "logRestock": "UPDATE magazzino SET qta = qta + 5 · riassortimento",
-        "invalid": "Inserisci prodotto, quantità e prezzo validi.",
-        "seed": [
-          "Display iPhone 11",
-          "Batteria Galaxy S21",
-          "Connettore USB-C",
-          "Pellicola 3D Privacy"
-        ]
-      },
-      "py": {
-        "run": "Esegui Routine",
-        "running": "In esecuzione…",
-        "rerun": "Esegui di nuovo",
-        "raw": "INPUT · foglio grezzo",
-        "clean": "OUTPUT · report pulito",
-        "idle": "In attesa di esecuzione. Clicca su “Esegui Routine”.",
-        "waiting": "in attesa dei dati…",
-        "colChannel": "Canale",
-        "colOrders": "Ordini",
-        "colRevenue": "Fatturato",
-        "total": "Totale",
-        "issues": {
-          "dup": "DUPLICATO",
-          "missing": "VUOTO",
-          "format": "FORMATO"
+    "manifesto": {
+      "label": "Manifesto",
+      "p1": "Molte aziende perdono ancora opportunità a causa di siti lenti, processi manuali e informazioni sparse in fogli di calcolo.",
+      "p2": "{brand} sviluppa siti, gestionali e automazioni su misura per risolvere questi problemi, con un affiancamento in ogni fase.",
+      "quote": "Progetti [su misura], dalla pianificazione alla consegna, con lo stesso team.",
+      "cite": "Manifesto {brand}"
+    },
+    "method": {
+      "index": "[03] — METODO",
+      "title": "Dalla chiamata <em>al lancio.</em>",
+      "intro": "Quattro fasi, e tu le segui tutte.",
+      "steps": [
+        {
+          "t": "Ascoltare",
+          "d": "Conosciamo la tua attività, i tuoi clienti e cosa va cambiato.",
+          "tags": [
+            "Briefing",
+            "Obiettivi",
+            "Riferimenti"
+          ]
         },
-        "header": "data;cliente;canale;importo",
-        "file": "vendite_grezze.xlsx",
-        "report": "report_pulito.xlsx",
-        "channels": [
-          "Marketplace",
-          "Negozio fisico",
-          "E-commerce",
-          "WhatsApp"
-        ],
-        "logs": [
-          "$ python routine_report.py --input vendite_grezze.xlsx",
-          "[1/5] Lettura del foglio grezzo… 1.284 righe trovate",
-          "[2/5] Rimozione dei duplicati… 37 record scartati",
-          "[3/5] Normalizzazione di date, importi e nomi…",
-          "[4/5] Raggruppamento per canale di vendita…",
-          "[5/5] Esportazione report_pulito.xlsx + dashboard.pdf",
-          "✓ Routine completata in 0,84 s — 1.247 righe valide"
-        ]
-      }
+        {
+          "t": "Pianificare",
+          "d": "Definiamo pagine, funzioni e tempi. Approvi tu prima di iniziare.",
+          "tags": [
+            "Perimetro",
+            "Wireframe",
+            "Tempi"
+          ]
+        },
+        {
+          "t": "Costruire",
+          "d": "Design e codice vanno di pari passo, e vedi ogni versione.",
+          "tags": [
+            "Design",
+            "Codice",
+            "Test"
+          ]
+        },
+        {
+          "t": "Consegnare",
+          "d": "Lo mettiamo online, ti mostriamo come usarlo e restiamo vicini.",
+          "tags": [
+            "Pubblicazione",
+            "Formazione",
+            "Supporto"
+          ]
+        }
+      ]
     },
     "about": {
-      "index": "[05] — CHI SIAMO",
+      "index": "[04] — CHI SIAMO",
       "title": "Chi c'è dietro.",
       "shared": "Informatica — UNIP · San Paolo, Brasile",
       "k": {
@@ -720,19 +647,53 @@ window.TRANSLATIONS = {
       "portfolio": "Portfolio"
     },
     "contact": {
-      "index": "[06] — CONTATTI",
-      "title": "Diamo forma alla tua idea?",
-      "intro": "Scegli il tipo di progetto e scrivici su WhatsApp. Proposta su misura e senza impegno.",
+      "index": "[05] — CONTATTI",
+      "title": "La tua attività <em>online.</em>",
+      "intro": "Scrivi il nome della tua attività e guarda un'anteprima. Il resto lo costruiamo insieme.",
+      "nameLabel": "Nome della tua attività",
+      "namePh": "Es.: Forno Centrale",
+      "nameFallback": "La Tua Attività",
+      "typeLabel": "Che tipo di progetto?",
       "types": {
         "site": "Sito web",
         "landing": "Landing page",
         "system": "Sistema",
         "automation": "Automazione"
       },
-      "waK": "Scrivi a Kauã",
-      "waG": "Scrivi a Gustavo",
-      "email": "Invia un'e-mail",
-      "msg": "Ciao Kauã e Gustavo! Ho visto il sito di {brand} e vorrei parlare di un progetto: {type}.",
+      "cta": "Parla con il team",
+      "email": "Preferisco l'e-mail",
+      "msg": "Ciao! Ho visto il sito di {brand} e vorrei parlare di un progetto di {type}.",
+      "msgNamed": "Ciao! Ho visto il sito di {brand}. Sono di {name} e vorrei parlare di un progetto di {type}.",
+      "previewTag": "ANTEPRIMA",
+      "domain": ".it",
+      "preview": {
+        "site": {
+          "k": "Benvenuti",
+          "s": "Tutto ciò che i tuoi clienti devono sapere, in un solo posto.",
+          "b": "Scopri"
+        },
+        "landing": {
+          "k": "Offerta speciale",
+          "s": "Una pagina fatta per trasformare le visite in contatti.",
+          "b": "Lo voglio"
+        },
+        "system": {
+          "k": "Pannello",
+          "s": "Vendite, magazzino e clienti in un unico sistema.",
+          "b": "Accedi"
+        },
+        "automation": {
+          "k": "Routine automatica",
+          "s": "Report pronti ogni giorno, senza aprire fogli di calcolo.",
+          "b": "Vedi report"
+        }
+      },
+      "direct": {
+        "title": "Oppure scrivici direttamente",
+        "wa": "WhatsApp",
+        "mail": "E-mail",
+        "ig": "Instagram"
+      },
       "subject": "Progetto {type} — dal sito"
     },
     "footer": {
@@ -750,8 +711,7 @@ window.TRANSLATIONS = {
     "a11y": {
       "lang": "Seleccionar idioma",
       "menu": "Abrir menú de navegación",
-      "range": "Control de compilación del wireframe",
-      "tabs": "Pestañas del simulador"
+      "wa": "Hablar con el equipo por WhatsApp"
     },
     "status": {
       "status": "ESTADO",
@@ -761,7 +721,7 @@ window.TRANSLATIONS = {
     "nav": {
       "services": "Servicios",
       "projects": "Proyectos",
-      "sim": "Pruébalo en vivo",
+      "method": "Método",
       "about": "Nosotros",
       "cta": "Hablemos"
     },
@@ -773,7 +733,7 @@ window.TRANSLATIONS = {
       "l2": "SISTEMA · DATOS",
       "l3": "RUTINA · PYTHON",
       "fig": "FIG. 01 — UNA INFRAESTRUCTURA, TRES CAPAS",
-      "index": "[01] — ESTUDIO DE SOFTWARE",
+      "index": "// ESTUDIO DE SOFTWARE",
       "sub": "Sitios web, sistemas y automatizaciones a medida para empresas de cualquier tamaño.",
       "ctaPrimary": "Ver proyectos",
       "ctaSecondary": "Hablemos",
@@ -786,7 +746,7 @@ window.TRANSLATIONS = {
       "Diseño"
     ],
     "services": {
-      "index": "[02] — SERVICIOS",
+      "index": "[01] — SERVICIOS",
       "title": "Del sitio web al <em>sistema.</em>",
       "items": [
         {
@@ -808,8 +768,8 @@ window.TRANSLATIONS = {
       ]
     },
     "projects": {
-      "index": "[03] — PROYECTOS",
-      "title": "Proyectos.",
+      "index": "[02] — PROYECTOS",
+      "title": "Proyectos <em>destacados.</em>",
       "intro": "Trabajos publicados. Haz clic y míralos funcionar.",
       "by": "por",
       "links": {
@@ -850,104 +810,58 @@ window.TRANSLATIONS = {
         }
       ]
     },
-    "sim": {
-      "index": "[04] — PRUÉBALO EN VIVO",
-      "title": "Pruébalo en vivo.",
-      "intro": "Tres mini demos funcionando en tu navegador.",
-      "live": "EN VIVO",
-      "tabs": {
-        "web": "Web & Landing Pages",
-        "stock": "Sistemas & Inventario",
-        "py": "Automatización Python"
-      },
-      "web": {
-        "hint": "Arrastra el control para compilar el wireframe en interfaz",
-        "wire": "WIREFRAME · FIGMA",
-        "ui": "INTERFAZ · HTML/CSS/TAILWIND",
-        "desktop": "Escritorio",
-        "mobile": "Móvil",
-        "brand": "Aurora Dental",
-        "nav1": "Servicios",
-        "nav2": "Equipo",
-        "nav3": "Contacto",
-        "heroTitle": "Reserva tu cita en 30 segundos.",
-        "heroText": "Atención cercana, horarios flexibles y confirmación inmediata por WhatsApp.",
-        "cta": "Reservar ahora",
-        "card1": "Implantes",
-        "card2": "Ortodoncia",
-        "card3": "Blanqueamiento",
-        "status": "build ok · responsive · accesible",
-        "figma": "frame: Hero / Auto Layout 24 · Figma"
-      },
-      "stock": {
-        "title": "Panel de Inventario — v1.0",
-        "kItems": "Unidades en stock",
-        "kValue": "Valor del inventario",
-        "kSales": "Ventas hoy",
-        "kLow": "Alertas de stock bajo",
-        "fName": "Producto",
-        "fQty": "Cant.",
-        "fPrice": "Precio",
-        "add": "Registrar",
-        "cProduct": "Producto",
-        "cQty": "Cant.",
-        "cPrice": "Precio",
-        "cAct": "Acción",
-        "sell": "Vender",
-        "restock": "Reponer",
-        "low": "BAJO",
-        "ok": "OK",
-        "logReady": "Conectado a mysql://inventario — listo.",
-        "logInsert": "INSERT INTO productos",
-        "logSale": "UPDATE inventario SET cant = cant - 1 · venta registrada",
-        "logRestock": "UPDATE inventario SET cant = cant + 5 · reposición",
-        "invalid": "Introduce un producto, una cantidad y un precio válidos.",
-        "seed": [
-          "Pantalla iPhone 11",
-          "Batería Galaxy S21",
-          "Conector USB-C",
-          "Protector 3D Privacidad"
-        ]
-      },
-      "py": {
-        "run": "Ejecutar Rutina",
-        "running": "Ejecutando…",
-        "rerun": "Ejecutar de nuevo",
-        "raw": "ENTRADA · hoja bruta",
-        "clean": "SALIDA · informe limpio",
-        "idle": "Esperando ejecución. Haz clic en “Ejecutar Rutina”.",
-        "waiting": "esperando datos…",
-        "colChannel": "Canal",
-        "colOrders": "Pedidos",
-        "colRevenue": "Ingresos",
-        "total": "Total",
-        "issues": {
-          "dup": "DUPLICADO",
-          "missing": "VACÍO",
-          "format": "FORMATO"
+    "manifesto": {
+      "label": "Manifiesto",
+      "p1": "Muchas empresas todavía pierden oportunidades por webs lentas, procesos manuales e información dispersa en hojas de cálculo.",
+      "p2": "{brand} desarrolla webs, sistemas y automatizaciones a medida para resolver estos problemas, con acompañamiento en cada etapa.",
+      "quote": "Proyectos [a medida], de la planificación a la entrega, con el mismo equipo.",
+      "cite": "Manifiesto {brand}"
+    },
+    "method": {
+      "index": "[03] — MÉTODO",
+      "title": "De la charla <em>al lanzamiento.</em>",
+      "intro": "Cuatro etapas, y tú sigues cada una.",
+      "steps": [
+        {
+          "t": "Escuchar",
+          "d": "Conocemos tu negocio, a tus clientes y lo que hay que cambiar.",
+          "tags": [
+            "Briefing",
+            "Objetivos",
+            "Referencias"
+          ]
         },
-        "header": "fecha;cliente;canal;importe",
-        "file": "ventas_brutas.xlsx",
-        "report": "informe_limpio.xlsx",
-        "channels": [
-          "Marketplace",
-          "Tienda física",
-          "E-commerce",
-          "WhatsApp"
-        ],
-        "logs": [
-          "$ python rutina_informe.py --input ventas_brutas.xlsx",
-          "[1/5] Leyendo hoja de cálculo bruta… 1.284 filas encontradas",
-          "[2/5] Eliminando duplicados… 37 registros descartados",
-          "[3/5] Normalizando fechas, importes y nombres…",
-          "[4/5] Agrupando por canal de venta…",
-          "[5/5] Exportando informe_limpio.xlsx + dashboard.pdf",
-          "✓ Rutina completada en 0,84 s — 1.247 filas válidas"
-        ]
-      }
+        {
+          "t": "Planificar",
+          "d": "Definimos páginas, funciones y plazos. Tú apruebas antes de empezar.",
+          "tags": [
+            "Alcance",
+            "Wireframe",
+            "Plazos"
+          ]
+        },
+        {
+          "t": "Construir",
+          "d": "Diseño y código avanzan juntos, y ves cada versión.",
+          "tags": [
+            "Diseño",
+            "Código",
+            "Pruebas"
+          ]
+        },
+        {
+          "t": "Entregar",
+          "d": "Lo publicamos, te enseñamos a usarlo y seguimos cerca.",
+          "tags": [
+            "Publicación",
+            "Formación",
+            "Soporte"
+          ]
+        }
+      ]
     },
     "about": {
-      "index": "[05] — NOSOTROS",
+      "index": "[04] — NOSOTROS",
       "title": "Quién está detrás.",
       "shared": "Ciencias de la Computación — UNIP · São Paulo, Brasil",
       "k": {
@@ -961,19 +875,53 @@ window.TRANSLATIONS = {
       "portfolio": "Portafolio"
     },
     "contact": {
-      "index": "[06] — CONTACTO",
-      "title": "¿Hacemos realidad tu idea?",
-      "intro": "Elige el tipo de proyecto y escríbenos por WhatsApp. Propuesta a medida y sin compromiso.",
+      "index": "[05] — CONTACTO",
+      "title": "Tu negocio, <em>en línea.</em>",
+      "intro": "Escribe el nombre de tu negocio y mira una vista previa. El resto lo construimos juntos.",
+      "nameLabel": "Nombre de tu negocio",
+      "namePh": "Ej.: Panadería Central",
+      "nameFallback": "Tu Negocio",
+      "typeLabel": "¿Qué tipo de proyecto?",
       "types": {
         "site": "Sitio web",
         "landing": "Landing page",
         "system": "Sistema",
         "automation": "Automatización"
       },
-      "waK": "Hablar con Kauã",
-      "waG": "Hablar con Gustavo",
-      "email": "Enviar e-mail",
-      "msg": "¡Hola, Kauã y Gustavo! Vi el sitio de {brand} y quiero hablar sobre un proyecto de {type}.",
+      "cta": "Hablar con el equipo",
+      "email": "Prefiero e-mail",
+      "msg": "¡Hola! Vi la web de {brand} y quiero hablar sobre un proyecto de {type}.",
+      "msgNamed": "¡Hola! Vi la web de {brand}. Soy de {name} y quiero hablar sobre un proyecto de {type}.",
+      "previewTag": "VISTA PREVIA",
+      "domain": ".es",
+      "preview": {
+        "site": {
+          "k": "Bienvenidos",
+          "s": "Todo lo que tus clientes necesitan saber, en un solo lugar.",
+          "b": "Conoce más"
+        },
+        "landing": {
+          "k": "Oferta especial",
+          "s": "Una página hecha para convertir visitas en contactos.",
+          "b": "Lo quiero"
+        },
+        "system": {
+          "k": "Panel",
+          "s": "Ventas, stock y clientes en un solo sistema.",
+          "b": "Entrar"
+        },
+        "automation": {
+          "k": "Rutina automática",
+          "s": "Informes listos cada día, sin abrir hojas de cálculo.",
+          "b": "Ver informe"
+        }
+      },
+      "direct": {
+        "title": "O escríbenos directo",
+        "wa": "WhatsApp",
+        "mail": "E-mail",
+        "ig": "Instagram"
+      },
       "subject": "Proyecto de {type} — desde el sitio"
     },
     "footer": {
