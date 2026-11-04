@@ -1059,7 +1059,8 @@ html.lang-switching .i18n-dyn {
   .band__aside p { display: none; }
   .step__tags { display: none; }
   .person__text { display: none; }
-  .contact__intro, .contact__mail, .pv { display: none; }
+  .contact__intro, .contact__mail, .pv, .contact__form .field { display: none; }
+  .contact__actions { margin-top: 28px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

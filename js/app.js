@@ -389,7 +389,9 @@
      CONTACT · business name + project type → live preview, and the
      WhatsApp / e-mail links carry a pre-filled message
      ==================================================================== */
-  const contact = { type: "site", name: "" };
+  // touched: the visitor picked a type or typed a name. Until then (and always on phones,
+  // where those fields are hidden) the WhatsApp message stays generic.
+  const contact = { type: "site", name: "", touched: false };
   const slugify = (v) => v.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "");
 
   function renderContact() {
@@ -400,7 +402,8 @@
     });
     const typeName = t(`contact.types.${contact.type}`);
     const name = contact.name.trim();
-    const msg = t(name ? "contact.msgNamed" : "contact.msg", { type: typeName.toLowerCase(), name });
+    const key = !contact.touched ? "contact.msgPlain" : name ? "contact.msgNamed" : "contact.msg";
+    const msg = t(key, { type: typeName.toLowerCase(), name });
     const wa = `https://wa.me/${CONTACT.wa}?text=${encodeURIComponent(msg)}`;
     $("#wa-team").href = wa;
     $("#wa-float").href = wa;
@@ -520,9 +523,10 @@
       const chip = e.target.closest(".chip");
       if (!chip || chip.dataset.type === contact.type) return;
       contact.type = chip.dataset.type;
+      contact.touched = true;
       renderContact();
     });
-    $("#biz-name").addEventListener("input", (e) => { contact.name = e.target.value; renderContact(); });
+    $("#biz-name").addEventListener("input", (e) => { contact.name = e.target.value; contact.touched = true; renderContact(); });
     // landing page countdown: a loop of 2h14m37s that keeps ticking down
     const START = 2 * 3600 + 14 * 60 + 37, t0 = Date.now();
     setInterval(() => {
