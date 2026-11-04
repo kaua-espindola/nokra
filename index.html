@@ -6,7 +6,7 @@
   <title>Nokra — Desenvolvimento Web, Sistemas e Automação Python</title>
   <meta name="description" content="Dupla de engenheiros de software do Brasil para Brasil e Europa: sites de alta conversão, sistemas sob medida com controle de estoque e automações em Python.">
   <meta name="theme-color" content="#0A0A0B">
-  <meta name="author" content="Kauã Espíndola Rocha de Godoi & Gustavo Clati Filiputi">
+  <meta name="author" content="Kauã & Gustavo">
 
   <!-- Smart routing: share links already in the client's language -->
   <link rel="alternate" hreflang="pt-BR" href="?lang=pt">
@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=10">
+  <link rel="stylesheet" href="css/style.css?v=11">
   <noscript><style>html.i18n-pending body{opacity:1}</style></noscript>
 </head>
 <body>
@@ -77,13 +77,27 @@
       </div>
     </nav>
 
+    <!-- full-screen menu (tablet and phone) -->
     <div class="mobile-drawer" id="mobile-drawer">
-      <div class="shell">
-        <a href="#servicos" class="drawer-link" id="drawer-servicos"><span class="mono">01</span><span data-i18n="nav.services"></span></a>
-        <a href="#projetos" class="drawer-link" id="drawer-projetos"><span class="mono">02</span><span data-i18n="nav.projects"></span></a>
-        <a href="#metodo" class="drawer-link" id="drawer-metodo"><span class="mono">03</span><span data-i18n="nav.method"></span></a>
-        <a href="#sobre" class="drawer-link" id="drawer-sobre"><span class="mono">04</span><span data-i18n="nav.about"></span></a>
-        <a href="#contato" class="btn btn--accent drawer-cta" id="drawer-cta"><span data-i18n="nav.cta"></span><svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M5 3h8v8"/></svg></a>
+      <div class="shell drawer__inner">
+        <nav class="drawer__nav" aria-label="Menu">
+          <a href="#servicos" class="drawer-link" id="drawer-servicos" style="--i:0"><span class="mono">01</span><span data-i18n="nav.services"></span></a>
+          <a href="#projetos" class="drawer-link" id="drawer-projetos" style="--i:1"><span class="mono">02</span><span data-i18n="nav.projects"></span></a>
+          <a href="#metodo" class="drawer-link" id="drawer-metodo" style="--i:2"><span class="mono">03</span><span data-i18n="nav.method"></span></a>
+          <a href="#sobre" class="drawer-link" id="drawer-sobre" style="--i:3"><span class="mono">04</span><span data-i18n="nav.about"></span></a>
+        </nav>
+        <div class="drawer__bottom" style="--i:4">
+          <a href="#contato" class="btn btn--accent btn--block drawer-cta" id="drawer-cta"><span data-i18n="nav.cta"></span><svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M5 3h8v8"/></svg></a>
+          <div class="drawer__row mono">
+            <div class="drawer__langs" role="group" data-i18n-aria="a11y.lang">
+              <button type="button" data-lang="pt" id="d-lang-pt">PT</button>
+              <button type="button" data-lang="en" id="d-lang-en">EN</button>
+              <button type="button" data-lang="it" id="d-lang-it">IT</button>
+              <button type="button" data-lang="es" id="d-lang-es">ES</button>
+            </div>
+            <a class="drawer__ig" id="drawer-ig" href="https://www.instagram.com/nokra.dev/" target="_blank" rel="noopener">@nokra.dev ↗</a>
+          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -272,7 +286,7 @@
           <article class="person" id="person-k">
             <div class="person__mark" aria-hidden="true"><span>K</span><i></i></div>
             <div class="person__body">
-              <h3 class="person__name">Kauã Espíndola</h3>
+              <h3 class="person__name">Kauã</h3>
               <p class="person__role mono" data-i18n="about.k.role"></p>
               <p class="person__text" data-i18n="about.k.text"></p>
               <div class="person__links"><a href="https://portfolio-2026-kaua.vercel.app/" target="_blank" rel="noopener" class="about__link mono" id="k-portfolio"><span data-i18n="about.portfolio"></span><span aria-hidden="true">↗</span></a><a href="https://github.com/kaua-espindola" target="_blank" rel="noopener" class="about__link mono" id="k-github">GitHub<span aria-hidden="true">↗</span></a><a href="https://linkedin.com/in/kaua-espindola-rocha-de-godoi" target="_blank" rel="noopener" class="about__link mono" id="k-linkedin">LinkedIn<span aria-hidden="true">↗</span></a></div>
@@ -281,7 +295,7 @@
           <article class="person" id="person-g">
             <div class="person__mark" aria-hidden="true"><span>G</span><i></i></div>
             <div class="person__body">
-              <h3 class="person__name">Gustavo Clati</h3>
+              <h3 class="person__name">Gustavo</h3>
               <p class="person__role mono" data-i18n="about.g.role"></p>
               <p class="person__text" data-i18n="about.g.text"></p>
               <div class="person__links"><a href="https://portifolio-gu.vercel.app" target="_blank" rel="noopener" class="about__link mono" id="g-portfolio"><span data-i18n="about.portfolio"></span><span aria-hidden="true">↗</span></a><a href="https://www.behance.net/gustavoclati" target="_blank" rel="noopener" class="about__link mono" id="g-behance">Behance<span aria-hidden="true">↗</span></a><a href="https://github.com/1Gudy" target="_blank" rel="noopener" class="about__link mono" id="g-github">GitHub<span aria-hidden="true">↗</span></a></div>
@@ -369,7 +383,7 @@
     <svg viewBox="0 0 24 24" aria-hidden="true"><path class="b" d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3.2 20.8l4.5-1.2A8.8 8.8 0 1 0 12 3.2z"/><path class="h" d="M8.9 7.6c.3-.3.8-.3 1 .1l1 1.8c.2.3.1.7-.2 1l-.6.6c.6 1.3 1.6 2.3 2.9 2.9l.6-.6c.3-.3.7-.3 1-.2l1.8 1c.4.2.4.7.1 1l-.8.9c-.5.5-1.3.7-2 .4a9.6 9.6 0 0 1-5.1-5.1c-.3-.7-.1-1.5.4-2z"/></svg>
   </a>
 
-  <script src="js/i18n.js?v=10"></script>
-  <script src="js/app.js?v=10"></script>
+  <script src="js/i18n.js?v=11"></script>
+  <script src="js/app.js?v=11"></script>
 </body>
 </html>

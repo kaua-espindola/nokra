@@ -456,12 +456,14 @@
   function initHeader() {
     const header = $("#site-header");
     const toggle = $("#menu-toggle");
-    const close = () => { header.classList.remove("menu-open"); toggle.setAttribute("aria-expanded", "false"); };
-    toggle.addEventListener("click", () => {
-      const open = !header.classList.contains("menu-open");
+    // full-screen menu: while open, the page behind it does not scroll
+    const setMenu = (open) => {
       header.classList.toggle("menu-open", open);
+      document.documentElement.classList.toggle("menu-lock", open);
       toggle.setAttribute("aria-expanded", String(open));
-    });
+    };
+    const close = () => setMenu(false);
+    toggle.addEventListener("click", () => setMenu(!header.classList.contains("menu-open")));
     $$(".mobile-drawer a").forEach((a) => a.addEventListener("click", close));
     window.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
     window.addEventListener("resize", () => { if (window.innerWidth > 1100) close(); moveLangIndicator(); }, { passive: true });
