@@ -214,22 +214,135 @@ window.TRANSLATIONS = {
         "site": {
           "k": "Bem-vindo",
           "s": "Tudo o que o seu cliente precisa saber, num só lugar.",
-          "b": "Conheça"
+          "b": "Conheça",
+          "b2": "Ver serviços",
+          "nav": [
+            "Início",
+            "Serviços",
+            "Contato"
+          ],
+          "feats": [
+            "Atendimento rápido",
+            "Qualidade garantida",
+            "Fale no WhatsApp"
+          ],
+          "rating": "128 avaliações",
+          "online": "Aberto agora"
         },
         "landing": {
           "k": "Oferta especial",
           "s": "Uma página feita para transformar visita em contato.",
-          "b": "Quero agora"
+          "b": "Quero agora",
+          "strip": "Últimas vagas",
+          "timer": "Termina em",
+          "form": "Garanta sua vaga",
+          "fields": [
+            "Seu nome",
+            "Seu WhatsApp"
+          ],
+          "send": "Enviar",
+          "safe": "Seus dados estão seguros",
+          "proof": "+1.200 clientes satisfeitos",
+          "off": "OFF"
         },
         "system": {
           "k": "Painel",
-          "s": "Vendas, estoque e clientes organizados num só sistema.",
-          "b": "Entrar"
+          "nav": [
+            "Visão geral",
+            "Vendas",
+            "Estoque",
+            "Clientes"
+          ],
+          "search": "Buscar…",
+          "kpis": [
+            {
+              "l": "Vendas hoje",
+              "v": "R$ 4.280",
+              "d": "+12%"
+            },
+            {
+              "l": "Pedidos",
+              "v": "38",
+              "d": "+5"
+            },
+            {
+              "l": "Estoque baixo",
+              "v": "5",
+              "d": "itens"
+            }
+          ],
+          "chart": "Vendas da semana",
+          "days": [
+            "S",
+            "T",
+            "Q",
+            "Q",
+            "S",
+            "S",
+            "D"
+          ],
+          "table": "Últimos pedidos",
+          "orders": [
+            [
+              "#1042",
+              "Ana S.",
+              "R$ 189"
+            ],
+            [
+              "#1041",
+              "Bruno L.",
+              "R$ 74"
+            ],
+            [
+              "#1040",
+              "Carla M.",
+              "R$ 312"
+            ]
+          ],
+          "status": [
+            "Pago",
+            "Pago",
+            "Pendente"
+          ],
+          "goal": "Meta do mês"
         },
         "automation": {
           "k": "Rotina automática",
-          "s": "Relatórios prontos todo dia, sem ninguém abrir planilha.",
-          "b": "Ver relatório"
+          "file": "vendas",
+          "nodes": [
+            {
+              "t": "Planilha",
+              "d": "1.248 linhas"
+            },
+            {
+              "t": "Script Python",
+              "d": "todo dia às 08:00"
+            },
+            {
+              "t": "Relatório PDF",
+              "d": "enviado por e-mail"
+            }
+          ],
+          "log": [
+            "lendo planilha…",
+            "1.248 linhas processadas",
+            "gerando relatório…"
+          ],
+          "done": "Relatório enviado às 08:00",
+          "stats": [
+            {
+              "v": "32h",
+              "l": "economizadas por mês"
+            },
+            {
+              "v": "0",
+              "l": "planilhas abertas à mão"
+            },
+            {
+              "v": "100%",
+              "l": "no horário, todo dia"
+            }
+          ]
         }
       },
       "direct": {
@@ -442,22 +555,135 @@ window.TRANSLATIONS = {
         "site": {
           "k": "Welcome",
           "s": "Everything your customers need to know, in one place.",
-          "b": "Explore"
+          "b": "Explore",
+          "b2": "Our services",
+          "nav": [
+            "Home",
+            "Services",
+            "Contact"
+          ],
+          "feats": [
+            "Fast service",
+            "Guaranteed quality",
+            "Chat on WhatsApp"
+          ],
+          "rating": "128 reviews",
+          "online": "Open now"
         },
         "landing": {
           "k": "Special offer",
           "s": "A page built to turn visits into leads.",
-          "b": "Get it now"
+          "b": "Get it now",
+          "strip": "Last spots",
+          "timer": "Ends in",
+          "form": "Save your spot",
+          "fields": [
+            "Your name",
+            "Your phone"
+          ],
+          "send": "Send",
+          "safe": "Your data is safe",
+          "proof": "1,200+ happy customers",
+          "off": "OFF"
         },
         "system": {
           "k": "Dashboard",
-          "s": "Sales, stock and customers in one system.",
-          "b": "Sign in"
+          "nav": [
+            "Overview",
+            "Sales",
+            "Stock",
+            "Customers"
+          ],
+          "search": "Search…",
+          "kpis": [
+            {
+              "l": "Sales today",
+              "v": "$4,280",
+              "d": "+12%"
+            },
+            {
+              "l": "Orders",
+              "v": "38",
+              "d": "+5"
+            },
+            {
+              "l": "Low stock",
+              "v": "5",
+              "d": "items"
+            }
+          ],
+          "chart": "Sales this week",
+          "days": [
+            "M",
+            "T",
+            "W",
+            "T",
+            "F",
+            "S",
+            "S"
+          ],
+          "table": "Latest orders",
+          "orders": [
+            [
+              "#1042",
+              "Anna S.",
+              "$189"
+            ],
+            [
+              "#1041",
+              "Brian L.",
+              "$74"
+            ],
+            [
+              "#1040",
+              "Carla M.",
+              "$312"
+            ]
+          ],
+          "status": [
+            "Paid",
+            "Paid",
+            "Pending"
+          ],
+          "goal": "Monthly goal"
         },
         "automation": {
           "k": "Automated routine",
-          "s": "Reports ready every day, without opening a spreadsheet.",
-          "b": "View report"
+          "file": "sales",
+          "nodes": [
+            {
+              "t": "Spreadsheet",
+              "d": "1,248 rows"
+            },
+            {
+              "t": "Python script",
+              "d": "every day at 8:00"
+            },
+            {
+              "t": "PDF report",
+              "d": "sent by e-mail"
+            }
+          ],
+          "log": [
+            "reading spreadsheet…",
+            "1,248 rows processed",
+            "building report…"
+          ],
+          "done": "Report sent at 8:00",
+          "stats": [
+            {
+              "v": "32h",
+              "l": "saved per month"
+            },
+            {
+              "v": "0",
+              "l": "spreadsheets opened by hand"
+            },
+            {
+              "v": "100%",
+              "l": "on time, every day"
+            }
+          ]
         }
       },
       "direct": {
@@ -670,22 +896,135 @@ window.TRANSLATIONS = {
         "site": {
           "k": "Benvenuti",
           "s": "Tutto ciò che i tuoi clienti devono sapere, in un solo posto.",
-          "b": "Scopri"
+          "b": "Scopri",
+          "b2": "I nostri servizi",
+          "nav": [
+            "Home",
+            "Servizi",
+            "Contatti"
+          ],
+          "feats": [
+            "Risposta rapida",
+            "Qualità garantita",
+            "Scrivici su WhatsApp"
+          ],
+          "rating": "128 recensioni",
+          "online": "Aperto ora"
         },
         "landing": {
           "k": "Offerta speciale",
           "s": "Una pagina fatta per trasformare le visite in contatti.",
-          "b": "Lo voglio"
+          "b": "Lo voglio",
+          "strip": "Ultimi posti",
+          "timer": "Termina tra",
+          "form": "Prenota il tuo posto",
+          "fields": [
+            "Il tuo nome",
+            "Il tuo telefono"
+          ],
+          "send": "Invia",
+          "safe": "I tuoi dati sono al sicuro",
+          "proof": "Oltre 1.200 clienti soddisfatti",
+          "off": "OFF"
         },
         "system": {
           "k": "Pannello",
-          "s": "Vendite, magazzino e clienti in un unico sistema.",
-          "b": "Accedi"
+          "nav": [
+            "Panoramica",
+            "Vendite",
+            "Magazzino",
+            "Clienti"
+          ],
+          "search": "Cerca…",
+          "kpis": [
+            {
+              "l": "Vendite oggi",
+              "v": "€ 4.280",
+              "d": "+12%"
+            },
+            {
+              "l": "Ordini",
+              "v": "38",
+              "d": "+5"
+            },
+            {
+              "l": "Scorte basse",
+              "v": "5",
+              "d": "articoli"
+            }
+          ],
+          "chart": "Vendite della settimana",
+          "days": [
+            "L",
+            "M",
+            "M",
+            "G",
+            "V",
+            "S",
+            "D"
+          ],
+          "table": "Ultimi ordini",
+          "orders": [
+            [
+              "#1042",
+              "Anna S.",
+              "€ 189"
+            ],
+            [
+              "#1041",
+              "Bruno L.",
+              "€ 74"
+            ],
+            [
+              "#1040",
+              "Carla M.",
+              "€ 312"
+            ]
+          ],
+          "status": [
+            "Pagato",
+            "Pagato",
+            "In attesa"
+          ],
+          "goal": "Obiettivo del mese"
         },
         "automation": {
           "k": "Routine automatica",
-          "s": "Report pronti ogni giorno, senza aprire fogli di calcolo.",
-          "b": "Vedi report"
+          "file": "vendite",
+          "nodes": [
+            {
+              "t": "Foglio di calcolo",
+              "d": "1.248 righe"
+            },
+            {
+              "t": "Script Python",
+              "d": "ogni giorno alle 8:00"
+            },
+            {
+              "t": "Report PDF",
+              "d": "inviato via e-mail"
+            }
+          ],
+          "log": [
+            "lettura del foglio…",
+            "1.248 righe elaborate",
+            "creazione del report…"
+          ],
+          "done": "Report inviato alle 8:00",
+          "stats": [
+            {
+              "v": "32h",
+              "l": "risparmiate al mese"
+            },
+            {
+              "v": "0",
+              "l": "fogli aperti a mano"
+            },
+            {
+              "v": "100%",
+              "l": "puntuale, ogni giorno"
+            }
+          ]
         }
       },
       "direct": {
@@ -898,22 +1237,135 @@ window.TRANSLATIONS = {
         "site": {
           "k": "Bienvenidos",
           "s": "Todo lo que tus clientes necesitan saber, en un solo lugar.",
-          "b": "Conoce más"
+          "b": "Conoce más",
+          "b2": "Servicios",
+          "nav": [
+            "Inicio",
+            "Servicios",
+            "Contacto"
+          ],
+          "feats": [
+            "Atención rápida",
+            "Calidad garantizada",
+            "Escríbenos por WhatsApp"
+          ],
+          "rating": "128 reseñas",
+          "online": "Abierto ahora"
         },
         "landing": {
           "k": "Oferta especial",
           "s": "Una página hecha para convertir visitas en contactos.",
-          "b": "Lo quiero"
+          "b": "Lo quiero",
+          "strip": "Últimas plazas",
+          "timer": "Termina en",
+          "form": "Reserva tu plaza",
+          "fields": [
+            "Tu nombre",
+            "Tu teléfono"
+          ],
+          "send": "Enviar",
+          "safe": "Tus datos están seguros",
+          "proof": "Más de 1.200 clientes satisfechos",
+          "off": "DTO"
         },
         "system": {
           "k": "Panel",
-          "s": "Ventas, stock y clientes en un solo sistema.",
-          "b": "Entrar"
+          "nav": [
+            "Resumen",
+            "Ventas",
+            "Stock",
+            "Clientes"
+          ],
+          "search": "Buscar…",
+          "kpis": [
+            {
+              "l": "Ventas hoy",
+              "v": "4.280 €",
+              "d": "+12%"
+            },
+            {
+              "l": "Pedidos",
+              "v": "38",
+              "d": "+5"
+            },
+            {
+              "l": "Stock bajo",
+              "v": "5",
+              "d": "artículos"
+            }
+          ],
+          "chart": "Ventas de la semana",
+          "days": [
+            "L",
+            "M",
+            "X",
+            "J",
+            "V",
+            "S",
+            "D"
+          ],
+          "table": "Últimos pedidos",
+          "orders": [
+            [
+              "#1042",
+              "Ana S.",
+              "189 €"
+            ],
+            [
+              "#1041",
+              "Bruno L.",
+              "74 €"
+            ],
+            [
+              "#1040",
+              "Carla M.",
+              "312 €"
+            ]
+          ],
+          "status": [
+            "Pagado",
+            "Pagado",
+            "Pendiente"
+          ],
+          "goal": "Meta del mes"
         },
         "automation": {
           "k": "Rutina automática",
-          "s": "Informes listos cada día, sin abrir hojas de cálculo.",
-          "b": "Ver informe"
+          "file": "ventas",
+          "nodes": [
+            {
+              "t": "Hoja de cálculo",
+              "d": "1.248 filas"
+            },
+            {
+              "t": "Script Python",
+              "d": "cada día a las 8:00"
+            },
+            {
+              "t": "Informe PDF",
+              "d": "enviado por e-mail"
+            }
+          ],
+          "log": [
+            "leyendo la hoja…",
+            "1.248 filas procesadas",
+            "generando el informe…"
+          ],
+          "done": "Informe enviado a las 8:00",
+          "stats": [
+            {
+              "v": "32h",
+              "l": "ahorradas al mes"
+            },
+            {
+              "v": "0",
+              "l": "hojas abiertas a mano"
+            },
+            {
+              "v": "100%",
+              "l": "puntual, cada día"
+            }
+          ]
         }
       },
       "direct": {

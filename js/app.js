@@ -408,30 +408,129 @@
     renderPreview();
   }
 
+  /* ---- live preview: each project type is its own little page.
+     The layout is rebuilt only when the type or language changes (that also replays
+     the entrance animation); typing the name just updates the [data-pv] text. */
+  const ARROW = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>`;
+  const ICONS = {
+    bolt: `<svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>`,
+    shield: `<svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>`,
+    chat: `<svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg>`,
+    grid: `<svg viewBox="0 0 24 24"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg>`,
+    cart: `<svg viewBox="0 0 24 24"><path d="M3 4h3l2.4 11h10.2L21 7H7"/><circle cx="10" cy="19" r="1.4"/><circle cx="17" cy="19" r="1.4"/></svg>`,
+    box: `<svg viewBox="0 0 24 24"><path d="M3 7l9-4 9 4v10l-9 4-9-4z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg>`,
+    user: `<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.5 4.2-6.5 8-6.5s7 2 8 6.5"/></svg>`,
+  };
+  const PV = {
+    site: (p) => `
+      <div class="ps">
+        <header class="ps__nav pv-in"><span class="ps__logo"><i></i><b data-pv="name"></b></span>
+          <nav>${p.nav.map((x) => `<span>${esc(x)}</span>`).join("")}</nav><span class="ps__cta">${esc(p.b)}</span></header>
+        <section class="ps__hero">
+          <div class="ps__copy">
+            <span class="ps__k pv-in" style="--i:1">${esc(p.k)}</span>
+            <strong class="ps__name pv-in" style="--i:2" data-pv="name"></strong>
+            <p class="ps__s pv-in" style="--i:3">${esc(p.s)}</p>
+            <div class="ps__btns pv-in" style="--i:4"><span class="ps__b1">${esc(p.b)} ${ARROW}</span><span class="ps__b2">${esc(p.b2)}</span></div>
+          </div>
+          <div class="ps__art pv-in" style="--i:2">
+            <div class="ps__img"><i class="sun"></i><i class="hill h1"></i><i class="hill h2"></i></div>
+            <div class="ps__badge"><span class="stars">★★★★★</span><b>4,9</b><small>${esc(p.rating)}</small></div>
+            <div class="ps__open"><i></i>${esc(p.online)}</div>
+          </div>
+        </section>
+        <ul class="ps__feats">${p.feats.map((f, i) => `<li class="pv-in" style="--i:${5 + i}">${ICONS[["bolt", "shield", "chat"][i]]}<span>${esc(f)}</span></li>`).join("")}</ul>
+      </div>`,
+    landing: (p) => `
+      <div class="pl">
+        <div class="pl__strip pv-in"><span>✦ ${esc(p.strip)}</span><span>${esc(p.timer)} <b data-pv="timer">02:14:37</b></span></div>
+        <section class="pl__main">
+          <div class="pl__copy">
+            <span class="pl__k pv-in" style="--i:1">${esc(p.k)}</span>
+            <strong class="pl__name pv-in" style="--i:2" data-pv="name"></strong>
+            <p class="pl__s pv-in" style="--i:3">${esc(p.s)}</p>
+            <span class="pl__btn pv-in" style="--i:4">${esc(p.b)} ${ARROW}</span>
+            <div class="pl__proof pv-in" style="--i:5"><span class="pl__avs"><i></i><i></i><i></i><i></i></span><small>${esc(p.proof)}</small></div>
+          </div>
+          <div class="pl__form pv-in" style="--i:3">
+            <span class="pl__sticker"><b>-30%</b><small>${esc(p.off)}</small></span>
+            <b class="pl__ft">${esc(p.form)}</b>
+            ${p.fields.map((f) => `<span class="pl__field">${esc(f)}</span>`).join("")}
+            <span class="pl__send">${esc(p.send)} ${ARROW}</span>
+            <small class="pl__safe">🔒 ${esc(p.safe)}</small>
+          </div>
+        </section>
+        <div class="pl__marq" aria-hidden="true"><div>${`<span>${esc(p.k)}</span><i>✦</i><span data-pv="name"></span><i>✦</i>`.repeat(4)}</div></div>
+      </div>`,
+    system: (p) => `
+      <div class="pd">
+        <aside class="pd__side pv-in"><span class="pd__mark"><i></i></span>
+          <ul>${p.nav.map((x, i) => `<li${i === 0 ? ' class="on"' : ""}>${ICONS[["grid", "cart", "box", "user"][i]]}<span>${esc(x)}</span></li>`).join("")}</ul></aside>
+        <section class="pd__main">
+          <header class="pd__top pv-in" style="--i:1"><div class="pd__title"><small>${esc(p.k)}</small><b data-pv="name"></b></div>
+            <span class="pd__search">⌕ ${esc(p.search)}</span><span class="pd__av" data-pv="initial"></span></header>
+          <div class="pd__kpis">${p.kpis.map((k, i) => `<div class="pd__kpi pv-in" style="--i:${2 + i}"><small>${esc(k.l)}</small><b>${esc(k.v)}</b><em class="${i === 2 ? "warn" : "up"}">${esc(k.d)}</em></div>`).join("")}</div>
+          <div class="pd__grid">
+            <div class="pd__card pd__chart pv-in" style="--i:5"><small>${esc(p.chart)}</small>
+              <div class="pd__bars">${[46, 62, 38, 74, 58, 88, 70].map((h, i) => `<i style="--h:${h}%;--b:${i}"${i === 5 ? ' class="on"' : ""}></i>`).join("")}</div>
+              <div class="pd__days">${p.days.map((d) => `<span>${esc(d)}</span>`).join("")}</div></div>
+            <div class="pd__card pd__table pv-in" style="--i:6"><small>${esc(p.table)}</small>
+              ${p.orders.map((o, i) => `<div class="pd__row"><span>${esc(o[0])}</span><span>${esc(o[1])}</span><span>${esc(o[2])}</span><em class="${i === 2 ? "wait" : "ok"}">${esc(p.status[i])}</em></div>`).join("")}
+              <div class="pd__goal"><small>${esc(p.goal)}</small><b>72%</b><i></i></div></div>
+          </div>
+        </section>
+      </div>`,
+    automation: (p) => `
+      <div class="pa">
+        <div class="pa__flow">
+          ${p.nodes.map((n, i) => `${i ? `<span class="pa__wire pv-in" style="--i:${i * 2}"><i></i></span>` : ""}
+            <div class="pa__node pv-in${i === 1 ? " is-py" : ""}" style="--i:${i * 2 + 1}"><span class="pa__ico">${["XLS", "PY", "PDF"][i]}</span>
+              <b${i === 0 ? ' data-pv="file"' : ""}>${esc(n.t)}</b><small>${esc(n.d)}</small></div>`).join("")}
+        </div>
+        <div class="pa__term">
+          <p class="cmd">$ python <span data-pv="slug"></span>.py</p>
+          ${p.log.map((l, i) => `<p style="--l:${i + 1}">→ ${esc(l)}</p>`).join("")}
+          <div class="pa__prog" style="--l:4"><i></i><span>100%</span></div>
+          <p class="ok" style="--l:5">✓ ${esc(p.done)}</p>
+        </div>
+        <div class="pa__stats">${p.stats.map((s, i) => `<div class="pv-in" style="--i:${6 + i}"><b>${esc(s.v)}</b><small>${esc(s.l)}</small></div>`).join("")}</div>
+      </div>`,
+  };
+  let pvKey = "";
+
   function renderPreview() {
-    const pv = $("#pv");
+    const pv = $("#pv"), body = $("#pv-body");
+    if (!pv || !body) return;
     const name = contact.name.trim();
     const shown = name || t("contact.nameFallback");
+    const slug = slugify(shown) || "nokra";
+    const key = `${contact.type}|${lang}`;
+    if (key !== pvKey) { body.innerHTML = PV[contact.type](t(`contact.preview.${contact.type}`)); pvKey = key; }
     pv.className = `pv pv--${contact.type}${name ? "" : " is-empty"}`;
     pv.style.setProperty("--len", Math.max(6, shown.length));
-    $("#pv-url").textContent = `${slugify(shown) || "nokra"}${t("contact.domain")}`;
-    ["#pv-logo", "#pv-name", "#pv-foot"].forEach((sel) => { $(sel).textContent = shown; });
-    $("#pv-k").textContent = t(`contact.preview.${contact.type}.k`);
-    $("#pv-s").textContent = t(`contact.preview.${contact.type}.s`);
-    $("#pv-b").textContent = t(`contact.preview.${contact.type}.b`);
+    $("#pv-url").textContent = `${slug}${t("contact.domain")}`;
+    $$('[data-pv="name"]', body).forEach((el) => { el.textContent = shown; });
+    $$('[data-pv="slug"]', body).forEach((el) => { el.textContent = slug; });
+    $$('[data-pv="initial"]', body).forEach((el) => { el.textContent = shown.charAt(0).toUpperCase(); });
+    $$('[data-pv="file"]', body).forEach((el) => { el.textContent = `${slug}_${t("contact.preview.automation.file")}.xlsx`; });
   }
 
   function initContact() {
-    const body = $("#pv-body");
     $("#contact-types").addEventListener("click", (e) => {
       const chip = e.target.closest(".chip");
       if (!chip || chip.dataset.type === contact.type) return;
       contact.type = chip.dataset.type;
       renderContact();
-      // replay the little "page loads" animation on the preview
-      body.classList.remove("is-swap"); void body.offsetWidth; body.classList.add("is-swap");
     });
     $("#biz-name").addEventListener("input", (e) => { contact.name = e.target.value; renderContact(); });
+    // landing page countdown: a loop of 2h14m37s that keeps ticking down
+    const START = 2 * 3600 + 14 * 60 + 37, t0 = Date.now();
+    setInterval(() => {
+      const el = $('#pv-body [data-pv="timer"]');
+      if (!el) return;
+      const s = START - (Math.floor((Date.now() - t0) / 1000) % START);
+      el.textContent = `${pad(Math.floor(s / 3600))}:${pad(Math.floor(s / 60) % 60)}:${pad(s % 60)}`;
+    }, 1000);
   }
 
   // floating WhatsApp: only after the hero, and out of the way at the contact section / footer
